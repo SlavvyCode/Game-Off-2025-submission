@@ -26,7 +26,6 @@ public class TopDownController : MonoBehaviour
     // private InputAction _lookAction;
     // private InputAction _pointAction;
     private Vector2 movementDirection = Vector2.zero;
-    private PlayerInputActions _controls;
     Vector2 mousePosition;
     
     void Awake()
@@ -38,15 +37,12 @@ public class TopDownController : MonoBehaviour
 
     private void Start()
     {
-        _controls = new PlayerInputActions();
+        var _controls = _playerInput.actions;
 
-        _controls.Enable();
+        _controls["Movement"].canceled += OnMoveControls;
+        _controls["Movement"].performed += OnMoveControls;
 
-        
-        _controls.Player.Movement.performed += OnMoveControls;
-        _controls.Player.Movement.canceled += OnMoveControls;
-
-        _controls.Player.Jump.started += ctx => OnJump();
+        _controls["Jump"].started += ctx => OnJump();
         // _controls.Player.Cursor.performed += ctx => mousePosition =
             // mainCam.ScreenToWorldPoint(new Vector3(ctx.ReadValue<Vector2>().x, ctx.ReadValue<Vector2>().y, 0));
         
