@@ -27,7 +27,7 @@ namespace Project.Scripts.UI
         [SerializeField] private GameObject playerHUD;
     
         // class used a lot for buttons in the main menu
-        [SerializeField] private GameObject mainMenu;
+        // [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject levelSelectCanvas;
         [SerializeField] private GameObject TitleScreenCanvas;
         
@@ -236,7 +236,7 @@ namespace Project.Scripts.UI
 
         public void HideAllUI()
         {
-            mainMenu.SetActive(false);
+            // mainMenu.SetActive(false);
             levelSelectCanvas.SetActive(false);
             levelCompleteCanvas.SetActive(false);
             playerHUD.SetActive(false);
