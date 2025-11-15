@@ -33,11 +33,7 @@ public abstract class AbstractEnemy : MonoBehaviour
 
     public abstract void EnemyBehavior();
 
-    public void RunAfterPlayer()
-    {
-        
-    }
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
