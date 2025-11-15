@@ -20,6 +20,9 @@ namespace Project.Scripts.Player
         {
             playerCollider = GetComponent<Collider2D>();
             _playerInput = GetComponent<PlayerInput>();   
+
+
+            UIManager.Instance.UpdateRockCount(rockCount);
         }
         
         void Update()
@@ -43,6 +46,7 @@ namespace Project.Scripts.Player
         public void AddRockToInventory()
         {
             rockCount++;
+            UIManager.Instance.UpdateRockCount(rockCount);
             Debug.Log($"Rock added to inventory. Total rocks: {rockCount}");
         }
         
@@ -51,6 +55,8 @@ namespace Project.Scripts.Player
             if (rockCount > 0)
             {
                 rockCount--;
+                UIManager.Instance.UpdateRockCount(rockCount);
+
                 Debug.Log($"Rock removed from inventory. Total rocks: {rockCount}");
             }
             else
