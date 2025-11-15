@@ -76,11 +76,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
+    - _MinSpeed: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaveSpeed: 1
-    - _WaveStrengh: 5
+    - _Slowing: 0.002
+    - _WaveSpeed: 4
+    - _WaveStrengh: 3
     - _WaveStrength: 40
+    - _WavesCount: 2
     - _ZWrite: 0
     m_Colors:
     - _BackroundColor: {r: 0, g: 0, b: 0, a: 0}
