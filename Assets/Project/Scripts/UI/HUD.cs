@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class UIManager : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
+    public static HUDManager Instance { get; private set; }
 
     [SerializeField] private TMP_Text rockCountText;  // or TMP_Text if using TMPro
 

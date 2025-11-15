@@ -1,3 +1,4 @@
+using Project.Scripts.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,35 +10,30 @@ public class TopDownController : MonoBehaviour
     public float speed = 12.5f;
     // public float turnRate = 200.0f;
 
-    private bool dashing = false;
-
-    private Camera mainCam;
-
-
+    // private Camera mainCam;
 
     Vector2 targetMovePosition;
 
 
     
-    private PlayerInput _playerInput;
+    public PlayerInput PlayerInput { get; private set; }    
     private InputAction _attackAction;
     private InputAction _jumpAction;
-    // private InputAction _clickAction;
-    // private InputAction _lookAction;
-    // private InputAction _pointAction;
     private Vector2 movementDirection = Vector2.zero;
     Vector2 mousePosition;
     
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerInput = GetComponent<PlayerInput>();
-        mainCam = Camera.main;
+        PlayerInput = GetComponent<PlayerInput>();
+        // mainCam = Camera.main;
     }
 
     private void Start()
     {
-        var _controls = _playerInput.actions;
+        UIManager.instance.RegisterPlayer(this);
+
+        var _controls = PlayerInput.actions;
 
         _controls["Movement"].canceled += OnMoveControls;
         _controls["Movement"].performed += OnMoveControls;
