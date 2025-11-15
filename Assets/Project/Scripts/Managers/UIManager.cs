@@ -18,7 +18,7 @@ namespace Project.Scripts.UI
         
         
         [SerializeField] private GameObject pauseMenu;
-        [SerializeField] private GameObject levelCompleteCanvas;
+        // [SerializeField] private GameObject levelCompleteCanvas;
         [SerializeField] private GameObject blackCanvas;
         [SerializeField] private UnityEngine.UI.Image blackPanel;
         [SerializeField] private float fadeInDuration = 0.2f;
@@ -28,8 +28,8 @@ namespace Project.Scripts.UI
     
         // class used a lot for buttons in the main menu
         // [SerializeField] private GameObject mainMenu;
-        [SerializeField] private GameObject levelSelectCanvas;
-        [SerializeField] private GameObject TitleScreenCanvas;
+        // [SerializeField] private GameObject levelSelectCanvas;
+        // [SerializeField] private GameObject TitleScreenCanvas;
         
         [SerializeField] private GameObject nextLevelButton;
 
@@ -115,12 +115,13 @@ namespace Project.Scripts.UI
             if (next.name == "MainMenu")
             {
                 LevelManager.Instance.SetActionMapToUI();
-                showTitleScreen();
-                if (LevelManager.Instance.showLevelSelect)
-                {
-                    ShowLevelSelect();
-                    LevelManager.Instance.showLevelSelect = false;
-                }
+                //TODO
+                // showTitleScreen();
+                // if (LevelManager.Instance.showLevelSelect)
+                // {
+                //     ShowLevelSelect();
+                //     LevelManager.Instance.showLevelSelect = false;
+                // }
 
                 return;
             }
@@ -225,20 +226,20 @@ namespace Project.Scripts.UI
 
         
 
-        public void ShowLevelSelect()
-        {
-            HideAllUI();
-            Util.SetActiveWithParents(levelSelectCanvas, true);
-        }
-    
+        // public void ShowLevelSelect()
+        // {
+        //     HideAllUI();
+        //     // Util.SetActiveWithParents(levelSelectCanvas, true);
+        // }
+        //
 
     
 
         public void HideAllUI()
         {
             // mainMenu.SetActive(false);
-            levelSelectCanvas.SetActive(false);
-            levelCompleteCanvas.SetActive(false);
+            // levelSelectCanvas.SetActive(false);
+            // levelCompleteCanvas.SetActive(false);
             playerHUD.SetActive(false);
             pauseMenu.SetActive(false);
         }
@@ -249,10 +250,10 @@ namespace Project.Scripts.UI
             playerHUD.SetActive(true);
         }
 
-        public void showTitleScreen()
-        {
-            Util.SetActiveWithParents(TitleScreenCanvas, true);
-        }
+        // public void showTitleScreen()
+        // {
+        //     Util.SetActiveWithParents(TitleScreenCanvas, true);
+        // }
 
 
        
