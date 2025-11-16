@@ -1,8 +1,15 @@
+using System;
 using Project.Scripts.Objects;
+using Project.Scripts.Sound;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableLever : MonoBehaviour, IInteractable
 {
+    
+    
+    private SaveableObject saveID;
+    
     [Header("Key Settings")]
     [SerializeField] private bool requiresKey = false;
     [SerializeField] public KeyType requiredKeyType;
@@ -13,6 +20,8 @@ public class InteractableLever : MonoBehaviour, IInteractable
 
     [Header("Linked Target")]
     [SerializeField] private LeverTarget pairedObject;
+    
+    [SerializeField] private SoundData leverSound;
 
     private SpriteRenderer sr;
     private bool isOn = false;
@@ -20,8 +29,16 @@ public class InteractableLever : MonoBehaviour, IInteractable
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        saveID = GetComponent<SaveableObject>();
+        
+        
         UpdateLeverSprite();
-        UpdateLeverSpriteColor();
+    }
+
+    private void Start()
+    {
+        
+        LoadState();
     }
 
     private void UpdateLeverSpriteColor()
@@ -41,7 +58,7 @@ public class InteractableLever : MonoBehaviour, IInteractable
             Debug.Log("Lever is locked. You need the correct key.");
             return;
         }
-
+        
         ToggleLever();
     }
 
@@ -63,16 +80,33 @@ public class InteractableLever : MonoBehaviour, IInteractable
     {
         isOn = !isOn;
         UpdateLeverSprite();
+        SaveState();
+        AudioManager.Instance.PlaySound(leverSound, transform.position);
 
         if (pairedObject != null)
             pairedObject.GetUsedByButton();
         else
             Debug.LogWarning("Lever has no paired object!");
     }
+  
+    private void SaveState()
+    {
+        PlayerPrefs.SetInt(saveID.UniqueID, isOn ? 1 : 0);
+    }
 
+    private void LoadState()
+    {
+        if (PlayerPrefs.HasKey(saveID.UniqueID))
+            isOn = PlayerPrefs.GetInt(saveID.UniqueID) == 1;
+        
+
+        if (isOn && pairedObject != null)
+            pairedObject.GetUsedByButton();
+    }
     private void UpdateLeverSprite()
     {
         sr.sprite = isOn ? leverOnSprite : leverOffSprite;
+        UpdateLeverSpriteColor();
     }
 
     public void Use(GameObject player)

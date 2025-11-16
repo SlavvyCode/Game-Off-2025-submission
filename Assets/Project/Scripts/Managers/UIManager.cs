@@ -57,6 +57,18 @@ namespace Project.Scripts.UI
         }
 
 
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
         
         private void Start()
         {

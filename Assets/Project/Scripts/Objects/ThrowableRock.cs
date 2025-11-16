@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Project.Scripts.Objects;
 using Project.Scripts.Player;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ public class Rock : MonoBehaviour
     bool landed = false;
     Rigidbody2D rb;
     private Collider2D rockCollider;
+    
+    [SerializeField] private SoundSet throwSoundSet;
+
+
+    
+    
 
     private void Awake()
     {
@@ -27,6 +34,19 @@ public class Rock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        //if other not player
+        if (other.collider.CompareTag("Player"))
+            return;
+        
+        
+        
+        // play collision sound
+        AudioManager.Instance.PlaySound(throwSoundSet.GetRandom(), transform.position);
+
+        
+        
+        
+        
         if (landed)
             return;
         
@@ -52,6 +72,9 @@ public class Rock : MonoBehaviour
     }
     void OnLand()
     {
+        
+        // play landing sound
+        AudioManager.Instance.PlaySound(throwSoundSet.GetRandom(), transform.position);
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
         

@@ -15,7 +15,7 @@ public abstract class AbstractEnemy : MonoBehaviour
         Vector3 vel = navMeshAgent.velocity;
 
         // If standing still, do nothing (avoids flicker)
-        if (Mathf.Abs(vel.x) < 0.01f)
+        if (Mathf.Abs(vel.x) < 0.1f)
             return;
 
         // Flip the sprite depending on movement direction

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7520419121205169064}
   - component: {fileID: 9153332487604144349}
   - component: {fileID: 3260694049505632765}
-  - component: {fileID: 4137970969495165467}
+  - component: {fileID: 8303366241953730139}
+  - component: {fileID: 7924594352743375987}
   m_Layer: 0
-  m_Name: Button
+  m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,10 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableButton
   requiresKey: 1
-  requiredKeyType: 0
+  requiredKeyType: 2
   leverOffSprite: {fileID: 21300000, guid: 8d46e46230a78e84786c68a1c482b275, type: 3}
   leverOnSprite: {fileID: 21300000, guid: 496c0a443643d4840ba9d99f7b3b06bb, type: 3}
   pairedObject: {fileID: 0}
+  leverSound: {fileID: 11400000, guid: 55fa7396b9d5f1f458e7cf6cbe1f7b78, type: 2}
 --- !u!61 &3260694049505632765
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97,7 +99,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!212 &4137970969495165467
+--- !u!212 &8303366241953730139
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,3 +157,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7924594352743375987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225132592141886997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36772b22ed84f70a77488178e2e566f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.SaveableObject
+  uniqueID: d7f43518-83af-4b5a-8c4f-51ff01c3648d

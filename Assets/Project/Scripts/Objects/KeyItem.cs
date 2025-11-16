@@ -1,4 +1,5 @@
 using System;
+using Project.Scripts.Sound;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -14,11 +15,29 @@ namespace Project.Scripts.Objects
     }
     public class KeyItem : MonoBehaviour
     {
+        private SaveableObject saveID;
+        
         private Collider2D keyCollider;
         [SerializeField]
         public KeyType keyType = KeyType.Red;
         SpriteRenderer spriteRenderer;
-        
+        [SerializeField] private SoundData keyPickupSound;
+
+        private void Awake()
+        {
+            saveID = GetComponent<SaveableObject>();
+            LoadState();
+        }
+
+        private void LoadState()
+        {
+            if (PlayerPrefs.GetInt(saveID.UniqueID, 0) == 1)
+            {
+                // Already picked up in a previous session
+                Destroy(gameObject);
+            }
+        }
+
         private void Start()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -60,17 +79,19 @@ namespace Project.Scripts.Objects
         {
             //if other tag not player
             if (!other.CompareTag("Player"))
-            {
                 return;
-            }
             
-            
+            // Save that collected.
+            PlayerPrefs.SetInt(saveID.UniqueID, 1);
+
             Inventory playerInventory = other.GetComponent<Inventory>();
             if (playerInventory != null)
             {
                 playerInventory.AddKey(this.keyType);
                 Destroy(gameObject);
             }
+            
+            AudioManager.Instance.PlaySound(keyPickupSound, transform.position);
             
         }
 

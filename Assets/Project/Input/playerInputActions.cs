@@ -154,6 +154,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scream"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c89234c-027c-4e8d-9b26-2ce658565e6b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""76b9c16f-ee3e-472e-a54f-981ee0fe15c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,23 +287,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a472c3bf-6034-4179-9913-1f927575b57f"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fbb143dc-da4e-4732-951c-aa6c8c47c8ce"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sneak"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95a4a3ea-db9d-4747-9761-3ddca8b1b8ff"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scream"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7f6b1b9-d553-420a-9125-c354edc08c50"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetDebug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -303,6 +332,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
+        m_Player_Scream = m_Player.FindAction("Scream", throwIfNotFound: true);
+        m_Player_ResetDebug = m_Player.FindAction("ResetDebug", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -390,6 +421,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Sneak;
+    private readonly InputAction m_Player_Scream;
+    private readonly InputAction m_Player_ResetDebug;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -429,6 +462,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Sneak".
         /// </summary>
         public InputAction @Sneak => m_Wrapper.m_Player_Sneak;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Scream".
+        /// </summary>
+        public InputAction @Scream => m_Wrapper.m_Player_Scream;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ResetDebug".
+        /// </summary>
+        public InputAction @ResetDebug => m_Wrapper.m_Player_ResetDebug;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -476,6 +517,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sneak.started += instance.OnSneak;
             @Sneak.performed += instance.OnSneak;
             @Sneak.canceled += instance.OnSneak;
+            @Scream.started += instance.OnScream;
+            @Scream.performed += instance.OnScream;
+            @Scream.canceled += instance.OnScream;
+            @ResetDebug.started += instance.OnResetDebug;
+            @ResetDebug.performed += instance.OnResetDebug;
+            @ResetDebug.canceled += instance.OnResetDebug;
         }
 
         /// <summary>
@@ -508,6 +555,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sneak.started -= instance.OnSneak;
             @Sneak.performed -= instance.OnSneak;
             @Sneak.canceled -= instance.OnSneak;
+            @Scream.started -= instance.OnScream;
+            @Scream.performed -= instance.OnScream;
+            @Scream.canceled -= instance.OnScream;
+            @ResetDebug.started -= instance.OnResetDebug;
+            @ResetDebug.performed -= instance.OnResetDebug;
+            @ResetDebug.canceled -= instance.OnResetDebug;
         }
 
         /// <summary>
@@ -597,5 +650,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSneak(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scream" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScream(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ResetDebug" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnResetDebug(InputAction.CallbackContext context);
     }
 }

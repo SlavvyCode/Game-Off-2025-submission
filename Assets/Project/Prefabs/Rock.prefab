@@ -129,7 +129,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49999997
+  m_Radius: 0.16106927
 --- !u!61 &7415918199812688896
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215,3 +215,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fa28ebb0182ce49abc0060d0ea12a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rock
+  throwSoundSet: {fileID: 11400000, guid: 05b15822471e3604ca4f843fd369c42f, type: 2}
