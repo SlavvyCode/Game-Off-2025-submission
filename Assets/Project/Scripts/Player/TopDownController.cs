@@ -31,7 +31,7 @@ public class TopDownController : MonoBehaviour
 
     private void Start()
     {
-        UIManager.instance.RegisterPlayer(this);
+        // UIManager.instance.RegisterPlayer(this);
 
         var _controls = PlayerInput.actions;
 
@@ -39,11 +39,10 @@ public class TopDownController : MonoBehaviour
         _controls["Movement"].performed += OnMoveControls;
         _controls["Sneak"].started += ToggleSneak;
         _controls["Sneak"].canceled += ToggleSneak;
-
-        _controls["Jump"].started += ctx => OnJump();
+        _controls["Pause"].started += ctx => UIManager.instance.TogglePause();
         // _controls.Player.Cursor.performed += ctx => mousePosition =
-            // mainCam.ScreenToWorldPoint(new Vector3(ctx.ReadValue<Vector2>().x, ctx.ReadValue<Vector2>().y, 0));
-        
+        //     mainCam.ScreenToWorldPoint(new Vector3(ctx.ReadValue<Vector2>().x, ctx.ReadValue<Vector2>().y, 0));
+        //
     }
 
     bool sneaking = false;
@@ -57,11 +56,6 @@ public class TopDownController : MonoBehaviour
             speed /= sneakMultiplier;
     }
 
-    private void OnJump()
-    {
-        //todo jump
-        Debug.Log("Jump pressed");
-    }
 
     void OnDestroy()
     {

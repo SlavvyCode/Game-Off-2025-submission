@@ -6,7 +6,6 @@ namespace LevelElements.Common
 {
     public class Checkpoint : MonoBehaviour
     {
-        //todo, later make bonuses last only after reaching checkpoint with them
         public int index { get; private set; }  = -1;
         public string checkpointId { get; private set; }
         private ParticleSystem particleSystem;

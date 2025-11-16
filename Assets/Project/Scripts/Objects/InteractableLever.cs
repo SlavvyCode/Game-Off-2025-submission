@@ -66,6 +66,7 @@ public class InteractableLever : MonoBehaviour, IInteractable
         if( CanUse(playerInventory))
         {
             ToggleLever();
+            HUDManager.Instance.ShowMessage("Lever used.");
         }
         else
         {

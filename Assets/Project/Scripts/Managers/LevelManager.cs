@@ -46,7 +46,6 @@ namespace General_and_Helpers
                 if (Instance == null)
                 {
                     Instance = this;
-                    DontDestroyOnLoad(gameObject);
                 }
                 else
                 {
@@ -59,7 +58,7 @@ namespace General_and_Helpers
 
             playerRb = _player.GetComponent<Rigidbody2D>();
 
-            // SceneManager.activeSceneChanged += OnSceneChanged;
+            SceneManager.activeSceneChanged += OnSceneChanged;
         
         }
 
@@ -103,7 +102,8 @@ namespace General_and_Helpers
             }
             playerSpawnPosition = GameObject.Find("SpawnPoint").transform.position;
 
-            OnSceneLoadedForRespawn(current, LoadSceneMode.Single);
+
+            MoveToCheckpoint();
         }
     
     
@@ -173,11 +173,7 @@ namespace General_and_Helpers
         
         }
 
-        // callback
-        void OnSceneLoadedForRespawn(Scene scene, LoadSceneMode mode)
-        {
-            MoveToCheckpoint();
-        }
+        
     
     
     
