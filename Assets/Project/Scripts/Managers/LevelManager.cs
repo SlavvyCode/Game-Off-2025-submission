@@ -129,6 +129,8 @@ namespace General_and_Helpers
 
         public void SetCheckpoint(Checkpoint checkpoint)
         {
+            if(currentSceneSaveData == null)
+                return;
             if (currentSceneSaveData.LastCheckpointId == null ||
                 checkpoint.index >= Checkpoint.FindByID(currentSceneSaveData.LastCheckpointId).index)
             {

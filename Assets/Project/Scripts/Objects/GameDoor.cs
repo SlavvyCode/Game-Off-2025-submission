@@ -52,7 +52,6 @@ public class GameDoor : LeverTarget
     public void Close()
     {
         isOpen = false;
-        //reappear
         doorCollider.enabled = true;
         doorSpriteRenderer.enabled = true;
     }

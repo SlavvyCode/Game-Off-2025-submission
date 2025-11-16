@@ -5,41 +5,43 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
    
-    private List<KeyItem> keys = new List<KeyItem>();
+    private Dictionary<KeyType,int> keys = new Dictionary<KeyType, int>();
     
-    public void AddKey(KeyItem key)
+    public void AddKey(KeyType type)
     {
-        keys.Add(key);
+        if (!keys.ContainsKey(type))
+            keys[type] = 0;
+
+        keys[type]++;
+    }
+    public bool HasKey(KeyType type)
+    {
+        return keys.ContainsKey(type) && keys[type] > 0;
+    }
+
+    public bool HasKeyToLever(InteractableLever lever)
+    {
+        return HasKey(lever.requiredKeyType);
     }
     
-    public bool HasKey(KeyItem key)
+
+    public void RemoveKey(KeyType type)
     {
-        return keys.Contains(key);
+        if (!HasKey(type))
+            return;
+
+        keys[type]--;
+
+        if (keys[type] <= 0)
+            keys.Remove(type);
     }
     
-    public KeyItem HasKeyToButton(InteractableLever lever)
+    public bool RemoveKeyIfHas(KeyType type)
     {
-        var desiredKey = keys.Find(k => k.pairedLever == lever);
-        if (desiredKey == null)
-        {
-            return null;
-        }
-        return desiredKey;
-        
-    }
-    
-    public void RemoveKey(KeyItem key)
-    {
-        keys.Remove(key);
-    }
-    
-    public bool RemoveKeyIfHas(KeyItem key)
-    {
-        if (HasKey(key))
-        {
-            RemoveKey(key);
-            return true;
-        }
-        return false;
+        if (!HasKey(type))
+            return false;
+
+        RemoveKey(type);
+        return true;
     }
 }

@@ -1,9 +1,11 @@
+using Project.Scripts.Objects;
 using UnityEngine;
 
 public class InteractableLever : MonoBehaviour, IInteractable
 {
     [Header("Key Settings")]
     [SerializeField] private bool requiresKey = false;
+    [SerializeField] public KeyType requiredKeyType;
 
     [Header("Lever Visuals")]
     [SerializeField] private Sprite leverOffSprite;
@@ -19,6 +21,17 @@ public class InteractableLever : MonoBehaviour, IInteractable
     {
         sr = GetComponent<SpriteRenderer>();
         UpdateLeverSprite();
+        UpdateLeverSpriteColor();
+    }
+
+    private void UpdateLeverSpriteColor()
+    {
+        // make it match the key color if it requires a key
+        if (requiresKey)
+        {
+            Color keyColor = KeyItem.GetColorForKeyType(requiredKeyType);
+            sr.color = keyColor;
+        }
     }
 
     public void GetInteractedWith(Inventory playerInventory = null)
@@ -40,7 +53,10 @@ public class InteractableLever : MonoBehaviour, IInteractable
         if (inv == null)
             return false;
 
-        return inv.HasKeyToButton(this) != null;
+        if (!inv.HasKey(requiredKeyType))
+            return false;
+
+        return true;
     }
 
     private void ToggleLever()
@@ -63,7 +79,7 @@ public class InteractableLever : MonoBehaviour, IInteractable
     {
         Inventory playerInventory = player.GetComponent<Inventory>();
         
-        if( CanUse(playerInventory))
+        if(CanUse(playerInventory))
         {
             ToggleLever();
             HUDManager.Instance.ShowMessage("Lever used.");
