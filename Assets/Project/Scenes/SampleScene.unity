@@ -1023,9 +1023,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.0631068
     width: 1
-    height: 1
+    height: 0.8737864
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -8515,6 +8515,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2057781527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057781517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df75b6cd0a743d24789328b66006ce92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  SoundWave: {fileID: 1064003233415522675, guid: fedc3d237a1662d4fbf4f836f4a5102f, type: 3}
 --- !u!1 &1041731116742510525
 GameObject:
   m_ObjectHideFlags: 0
@@ -8952,15 +8965,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionId
       value: 52aa2a81-82ee-4535-9910-7f520b94c224
       objectReference: {fileID: 0}
     - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 34babe38-d4f9-4496-ac47-e64a4bd53b1c
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 2c89234c-027c-4e8d-9b26-2ce658565e6b
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 76b9c16f-ee3e-472e-a54f-981ee0fe15c5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_ActionName
       value: 'Player/Menu[/Keyboard/escape]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: 'Player/Sneak[/Keyboard/shift]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: 'Player/Scream[/Keyboard/q]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686186617010741171, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Player/ResetDebug[/Keyboard/f8]'
       objectReference: {fileID: 0}
     - target: {fileID: 5695742081688783180, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -9013,6 +9050,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8617612170533726458, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2057781526}
+    - targetCorrespondingSourceObject: {fileID: 8617612170533726458, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2057781527}
   m_SourcePrefab: {fileID: 100100000, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
 --- !u!4 &5864223265690902598
 Transform:

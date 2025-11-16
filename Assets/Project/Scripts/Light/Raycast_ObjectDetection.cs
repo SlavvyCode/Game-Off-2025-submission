@@ -41,15 +41,16 @@ public class Raycast_ObjectDetection : MonoBehaviour
         InitializeMask(rayCount);
         renderer.material.SetTexture("_VisibilityMask", visibilityMask);
         //this.GetComponent<SpriteRenderer>().enabled = false;
+        Effect();
     }
 
     private void Update()
     {
-        if (previousPos != this.transform.position)
+        /*        if (previousPos != this.transform.position)
         {
             Effect();
             previousPos = this.transform.position;
-        }
+        }*/
 
         StartCoroutine(kill());
     }
@@ -60,6 +61,7 @@ public class Raycast_ObjectDetection : MonoBehaviour
     private float elapsedTime = 0f;
     private IEnumerator kill()
     {
+        Effect();
         yield return new WaitForSeconds(LifeTime);
         if (elapsedTime < endDuration)
         {
