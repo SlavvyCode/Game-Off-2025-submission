@@ -16,7 +16,6 @@ public class Raycast_ObjectDetection : MonoBehaviour
     public float maxDistance = 5f;          // maximální dosah vlny
     public LayerMask obstacleLayer;         // vrstva pro kolize (překážky)
     public GameObject shadowOnEnd;
-    public Light2D lightSource;
     public float LifeTime = 10f;
 
     Texture2D visibilityMask;
@@ -54,6 +53,7 @@ public class Raycast_ObjectDetection : MonoBehaviour
 
         StartCoroutine(kill());
     }
+    public Vector3 objectFinalScale = new Vector3(5f, 5f, 5f); // cílová velikost
     public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
     public float endDuration = 1f; // délka přechodu v sekundách
 
@@ -68,7 +68,7 @@ public class Raycast_ObjectDetection : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / endDuration);
             shadowOnEnd.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
-            lightSource.intensity = Mathf.Lerp(1, 0, t);
+            transform.localScale = Vector3.Lerp(initialScale, objectFinalScale, t);
         }
         yield return new WaitForSeconds(endDuration);
         Destroy(gameObject);
