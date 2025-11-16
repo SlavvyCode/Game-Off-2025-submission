@@ -13,30 +13,42 @@ public class Raycast_ObjectDetection : MonoBehaviour
     public float maxDistance = 5f;          // maximální dosah vlny
     public LayerMask obstacleLayer;         // vrstva pro kolize (překážky)
 
-    public Material waveMaterial;
     Texture2D visibilityMask;
     Color[] pixels;
     int textureSize = 32;
-    public int thickness = 1;
+    public float thickness = 1;
 
     // Pole pro uložení vzdáleností (délky paprsků)
     public float[] distances;
     Vector2[] polygonPoints;
     float angle;
     float rad;
-    bool a = true;
+    Vector3 previousPos = Vector2.zero;
     void Start()
     {
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material = Instantiate(renderer.material);
+
         distances = new float[rayCount];
         polygonPoints = new Vector2[rayCount];
 
         InitializeMask(rayCount);
-        waveMaterial.SetTexture("_VisibilityMask", visibilityMask);
-
+        renderer.material.SetTexture("_VisibilityMask", visibilityMask);
+        //this.GetComponent<SpriteRenderer>().enabled = false;
     }
 
-    void Update()
+    private void Update()
     {
+        if (previousPos != this.transform.position)
+        {
+            Effect();
+            previousPos = this.transform.position;
+        }
+    }
+    
+    private void Effect()
+    {
+        //this.GetComponent<SpriteRenderer>().enabled = true;
         Vector2 origin2D = transform.position;
         Vector3 origin3D = new Vector3(transform.position.x, transform.position.y, 0);
         RaycastHit hit3D;
@@ -74,10 +86,6 @@ public class Raycast_ObjectDetection : MonoBehaviour
             rad = distances[i] / maxDistance;
             polygonPoints[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * rad;
         }
-    }
-
-    private void FixedUpdate()
-    {
         UpdateRayLinesMask(distances, maxDistance, thickness);
     }
     void InitializeMask(int size)
@@ -104,45 +112,26 @@ public class Raycast_ObjectDetection : MonoBehaviour
                 float nx = (x / (float)(textureSize - 1)) * 2f - 1f;
                 float ny = (y / (float)(textureSize - 1)) * 2f - 1f;
                 float distance = Mathf.Sqrt(nx * nx + ny * ny);
-                if (distance > 1f)
-                    continue; // mimo jednotkový kruh
+                if (distance > 1f) continue;
 
-                // Úhel pixelu
                 float pixelAngle = Mathf.Atan2(ny, nx);
                 if (pixelAngle < 0) pixelAngle += 2f * Mathf.PI;
 
-                // Vzdálenost pixelu (normovaná)
-                float pixelRadius = distance;
+                int nearestRay = (int)(pixelAngle / (2f * Mathf.PI) * rayCount);
+                nearestRay = Mathf.Clamp(nearestRay, 0, rayCount - 1);
 
-                // Hledat nejbližší ray (úhel)
-                int nearestRay = 0;
-                float minAngleDiff = float.MaxValue;
-                int rayCount = distances.Length;
-                for (int i = 0; i < rayCount; i++)
-                {
-                    float rayAngle = (2f * Mathf.PI) * i / rayCount;
-                    float angleDiff = Mathf.Abs(Mathf.DeltaAngle(rayAngle * Mathf.Rad2Deg, pixelAngle * Mathf.Rad2Deg)) * Mathf.Deg2Rad;
-                    if (angleDiff < minAngleDiff)
-                    {
-                        minAngleDiff = angleDiff;
-                        nearestRay = i;
-                    }
-                }
+                float maxDist = distances[nearestRay] / maxDistance;
+                float thicknessAngle = (lineThicknessPixels / (float)textureSize) * Mathf.PI;
 
-                // Pokud je úhel pixelu dostatečně blízko nejbližšího raycastového paprsku (šířka pásu)
-                if (minAngleDiff <= (lineThicknessPixels / (float)textureSize) * Mathf.PI) // úhel approx. podle šířky v pixelech
-                {
-                    // Porovnat vzdálenost pixelu a vzdálenost raycastu na tomto ray
-                    float maxDist = distances[nearestRay] / maxDistance;
+                // Přepočet přesnosti šířky pásma na úhel
+                float angleDiff = Mathf.Abs(pixelAngle - ((2f * Mathf.PI) * nearestRay / rayCount));
+                angleDiff = Mathf.Min(angleDiff, 2f * Mathf.PI - angleDiff); // Korekce úhlu přes nulový bod
 
-                    if (pixelRadius <= maxDist)
-                    {
-                        // Pixel je viditelný a na paprsku → bílý
-                        pixels[y * textureSize + x] = Color.white;
-                    }
-                }
+                if (angleDiff <= thicknessAngle && distance <= maxDist)
+                    pixels[y * textureSize + x] = Color.white;
             }
         }
+
 
         visibilityMask.SetPixels(pixels);
         visibilityMask.Apply();
