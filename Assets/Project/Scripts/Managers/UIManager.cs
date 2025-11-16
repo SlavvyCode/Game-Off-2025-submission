@@ -110,7 +110,6 @@ namespace Project.Scripts.UI
         {
             pauseMenu.SetActive(false);
         }
-    
         
         public void PauseGame()
         {
@@ -125,12 +124,9 @@ namespace Project.Scripts.UI
             GameManager.Instance.SetPausedState(pausedState.Playing);
             HidePauseMenu();
         }
-
-    
-
+        
         public IEnumerator FadeToBlack()
         {
-            
             blackPanel.color = new Color(0f, 0f, 0f, 0f);
             blackCanvas.SetActive(true);
             blackPanel.gameObject.SetActive(true);
