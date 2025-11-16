@@ -16,8 +16,6 @@ namespace General_and_Helpers
         [SerializeField] private UIManager _uiManager;
         [SerializeField] private PlayerInput _playerInput;
 
-        [SerializeField] private List<LevelSaveData> _levelSaveDataList = new List<LevelSaveData>();
-        [SerializeField] public LevelSaveData currentSceneSaveData { get; private set; }
 
 
         private Rigidbody2D playerRb;
@@ -46,7 +44,6 @@ namespace General_and_Helpers
                 if (Instance == null)
                 {
                     Instance = this;
-                    DontDestroyOnLoad(gameObject);
                 }
                 else
                 {
@@ -59,34 +56,13 @@ namespace General_and_Helpers
 
             playerRb = _player.GetComponent<Rigidbody2D>();
 
-            // SceneManager.activeSceneChanged += OnSceneChanged;
+            SceneManager.activeSceneChanged += OnSceneChanged;
         
         }
 
 
 
-        private void AssignLevelSaveData(Scene scene)
-        {
-            bool correctDataFound = false;
-            // add if not present to lvl save data
-            foreach (var levelSaveData in _levelSaveDataList)
-            {
-                if (levelSaveData.SceneName == scene.name)
-                {
-                    currentSceneSaveData = levelSaveData;
-                    correctDataFound= true;
-                    break;
-                }
-            }
-
-            if (!correctDataFound)
-            {
-                currentSceneSaveData = new LevelSaveData();
-                currentSceneSaveData.SceneName = scene.name;
-                _levelSaveDataList.Add(currentSceneSaveData);
-            }
-
-        }
+  
 
         void OnSceneChanged(Scene current, Scene next)
         {
@@ -96,14 +72,14 @@ namespace General_and_Helpers
                 return;
             }
 
-            AssignLevelSaveData(next);
             if(next.name == "MainMenu")
             {
                 return;
             }
             playerSpawnPosition = GameObject.Find("SpawnPoint").transform.position;
 
-            OnSceneLoadedForRespawn(current, LoadSceneMode.Single);
+            //should all get done on its own
+            // MoveToCheckpoint();
         }
     
     
@@ -127,36 +103,21 @@ namespace General_and_Helpers
             SceneManager.LoadScene("Level " + nextSceneIndex);
         }
 
-        public void SetCheckpoint(Checkpoint checkpoint)
-        {
-            if (currentSceneSaveData.LastCheckpointId == null ||
-                checkpoint.index >= Checkpoint.FindByID(currentSceneSaveData.LastCheckpointId).index)
-            {
-                currentSceneSaveData.LastCheckpointId = checkpoint.checkpointId;
-            }
-        }
 
-
-        private void MoveToCheckpoint()
-        {
-            RefreshRefs();
-            //no save data or CP, ergo move to checkponit, ELSE 
-            if (currentSceneSaveData == null || currentSceneSaveData.LastCheckpointId == null)
-            {
-                _player.transform.position = playerSpawnPosition;
-                _mainCamera.transform.position = playerSpawnPosition;
-            }
-            else
-            {
-                // move to checkpoint
-                Checkpoint checkpoint = Checkpoint.FindByID(currentSceneSaveData.LastCheckpointId);
-                _player.transform.position = checkpoint.transform.position;
-                _mainCamera.transform.position = checkpoint.transform.position;
-                _player.transform.rotation = checkpoint.transform.rotation;
-            }
-
-            playerRb.linearVelocity = Vector2.zero;
-        }
+        //should all get done on its own
+        // private void MoveToCheckpoint()
+        // {
+            // RefreshRefs();
+            
+            //find in playerprefs
+            
+            // var checkpointPosX = PlayerPrefs.GetFloat(
+            
+            // _player.transform.position = ;
+            
+            
+            // playerRb.linearVelocity = Vector2.zero;
+        // }
 
 
 
@@ -173,11 +134,7 @@ namespace General_and_Helpers
         
         }
 
-        // callback
-        void OnSceneLoadedForRespawn(Scene scene, LoadSceneMode mode)
-        {
-            MoveToCheckpoint();
-        }
+        
     
     
     
@@ -203,20 +160,10 @@ namespace General_and_Helpers
         
         public void RestartLevelAndDeleteSaveData()
         {
-            //delete save data for this level
-            //find the save data for this level and remove it from the list
-            RemoveCurrLevelSaveData();
-            
-            //reload scene
             string currentScene = SceneManager.GetActiveScene().name;
+            PlayerPrefs.DeleteAll();
             StopAllCoroutines();
             SceneManager.LoadScene(currentScene);
-        }
-
-        public void RemoveCurrLevelSaveData()
-        {
-            if(currentSceneSaveData != null)
-                _levelSaveDataList.Remove(currentSceneSaveData);
         }
 
 

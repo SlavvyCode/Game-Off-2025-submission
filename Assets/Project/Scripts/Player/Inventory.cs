@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Project.Scripts.Objects;
 using UnityEngine;
@@ -5,41 +6,69 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
    
-    private List<KeyItem> keys = new List<KeyItem>();
-    
-    public void AddKey(KeyItem key)
+    public Dictionary<KeyType,int> keys = new Dictionary<KeyType, int>();
+
+
+    private void Start()
     {
-        keys.Add(key);
+        LoadKeys();
+        HUDManager.Instance.UpdateKeys(this);
     }
-    
-    public bool HasKey(KeyItem key)
+
+    public void AddKey(KeyType type)
     {
-        return keys.Contains(key);
+        if (!keys.ContainsKey(type))
+            keys[type] = 0;
+
+        keys[type]++;
+        PlayerPrefs.SetInt("key_" + type.ToString(), keys[type]);
+        HUDManager.Instance.UpdateKeys(this);
+
     }
-    
-    public KeyItem HasKeyToButton(InteractableButton button)
+    private void LoadKeys()
     {
-        var desiredKey = keys.Find(k => k.pairedButton == button);
-        if (desiredKey == null)
+        foreach (KeyType type in Enum.GetValues(typeof(KeyType)))
         {
-            return null;
+            int count = PlayerPrefs.GetInt("key_" + type.ToString(), 0);
+            if (count > 0)
+                keys[type] = count;
         }
-        return desiredKey;
-        
+    }
+
+    
+    public bool HasKey(KeyType type)
+    {
+        return keys.ContainsKey(type) && keys[type] > 0;
+    }
+
+    public bool HasKeyToLever(InteractableLever lever)
+    {
+        return HasKey(lever.requiredKeyType);
     }
     
-    public void RemoveKey(KeyItem key)
+
+    public void RemoveKey(KeyType type)
     {
-        keys.Remove(key);
+        if (!HasKey(type))
+            return;
+
+        keys[type]--;
+        if (keys[type] < 0)
+            keys[type] = 0;
+        PlayerPrefs.SetInt("key_" + type.ToString(), keys[type]);
+
+        if (keys[type] <= 0)
+            keys.Remove(type);
+        HUDManager.Instance.UpdateKeys(this);
+
     }
     
-    public bool RemoveKeyIfHas(KeyItem key)
+    public bool RemoveKeyIfHas(KeyType type)
     {
-        if (HasKey(key))
-        {
-            RemoveKey(key);
-            return true;
-        }
-        return false;
+        if (!HasKey(type))
+            return false;
+
+        RemoveKey(type);
+        return true;
     }
 }

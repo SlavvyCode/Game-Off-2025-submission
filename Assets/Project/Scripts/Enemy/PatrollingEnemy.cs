@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Project.Scripts.Sound;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PatrollingEnemy : AbstractEnemy
 {
     private int currentIndex = 0;
+    private float attackCooldown = 2f;
 
     [SerializeField]
     List<Transform> patrolPoints;
@@ -15,6 +17,27 @@ public class PatrollingEnemy : AbstractEnemy
     [SerializeField] float chasingStartDistance = .2f;
     [SerializeField] float chasingStopDistance = 0.2f;
 
+    
+    
+    
+    // when not chasing and patrolling, periodically hiss    
+    
+    // Periodically
+    // when snake hears noise, angry warning hiss, (optional pause) go investigate
+
+    [SerializeField]
+    private SoundData hissSound;
+    [SerializeField]
+    private SoundData warningHissSound;
+    
+    
+    [SerializeField] private float hissMinDelay = 3f;
+    [SerializeField] private float hissMaxDelay = 8f;
+    [SerializeField] private float warningDistance = 1.5f;
+
+    private float nextHissTime = 0f;
+
+    
     void Start()
     {
         Initialize();
@@ -65,6 +88,9 @@ public class PatrollingEnemy : AbstractEnemy
 
     private void Patrol()
     {
+        TryPlayPatrolHiss();
+
+        
         // if close to player, chase  player.
         // if very close to player, attack player periodically.
         // if was chasing player, but lost player (details?), return to patrol.
@@ -83,10 +109,32 @@ public class PatrollingEnemy : AbstractEnemy
         }
     }
 
+    private void TryPlayPatrolHiss()
+    {
+        if (Time.time < nextHissTime) 
+            return; // still on cooldown
+
+        // otherwise regular ambience patrol hiss
+        AudioManager.Instance.PlaySound(hissSound, transform.position);
+
+        // random delay before next hiss to make it feel natural
+        nextHissTime = Time.time + Random.Range(hissMinDelay, hissMaxDelay);
+        
+    }
+
 
     public void ChasePlayer()
     {
         navMeshAgent.SetDestination(playerLastKnownPosition);
     }
+
+
+    public void AttackPlayer()
+    {
+        // no need, just run into them
+    }
+    
+    
+    
 
 }

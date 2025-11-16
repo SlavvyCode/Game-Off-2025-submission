@@ -1,24 +1,24 @@
 using System;
 using General_and_Helpers;
+using Project.Scripts.Objects;
 using UnityEngine;
 
 namespace LevelElements.Common
 {
     public class Checkpoint : MonoBehaviour
     {
-        //todo, later make bonuses last only after reaching checkpoint with them
-        public int index { get; private set; }  = -1;
-        public string checkpointId { get; private set; }
         private ParticleSystem particleSystem;
         public static event Action OnCheckpointReached;
+        Vector2 respawnPos;
+        private bool used = false;
+        SaveableObject saveID;
         private void Awake()
         {
-            checkpointId = Util.GenerateID(gameObject);
+            saveID = GetComponent<SaveableObject>();
         }
 
         private void Start()
         {
-            //  can just drag it i was lazy
             particleSystem = GetComponentInChildren<ParticleSystem>(); 
         }
 
@@ -26,29 +26,27 @@ namespace LevelElements.Common
         {
             if (other.CompareTag("Player")) 
             {
-                LevelManager.Instance.SetCheckpoint(this); 
-                // particle effect to tell the player it worked
                 CheckpointParticles();
                 OnCheckpointReached?.Invoke();
+                
+                // Save that THIS checkpoint is the current one
+                PlayerPrefs.SetString("currentCheckpointID", saveID.UniqueID);
+
+                var respawnPos = transform.position;
+                
+                PlayerPrefs.SetFloat(saveID.UniqueID + "_x", respawnPos.x);
+                PlayerPrefs.SetFloat(saveID.UniqueID + "_y", respawnPos.y);
+                //can only be used once
+                PlayerPrefs.SetInt(saveID.UniqueID, 1);
+                // saves all changes to PlayerPrefs to ensure data persistence, not just for this checkpoint
+                PlayerPrefs.Save();
             }
         }
-
         private void CheckpointParticles()
         {
             particleSystem.Play();
         }
     
-        public static Checkpoint FindByID(string id)
-        {
-            var checkpoints = GameObject.FindObjectsOfType<Checkpoint>(true); // include inactive
-            foreach (var cp in checkpoints)
-            {
-                if (cp.checkpointId == id)
-                    return cp;
-            }
-
-            return null; 
-        }
-
+        
     }
 }

@@ -18,7 +18,7 @@ namespace Project.Scripts.UI
         
         
         [SerializeField] private GameObject pauseMenu;
-        [SerializeField] private GameObject levelCompleteCanvas;
+        // [SerializeField] private GameObject levelCompleteCanvas;
         [SerializeField] private GameObject blackCanvas;
         [SerializeField] private UnityEngine.UI.Image blackPanel;
         [SerializeField] private float fadeInDuration = 0.2f;
@@ -26,10 +26,6 @@ namespace Project.Scripts.UI
         private InputAction _menuAction;
         [SerializeField] private GameObject playerHUD;
     
-        // class used a lot for buttons in the main menu
-        // [SerializeField] private GameObject mainMenu;
-        [SerializeField] private GameObject levelSelectCanvas;
-        [SerializeField] private GameObject TitleScreenCanvas;
         
         [SerializeField] private GameObject nextLevelButton;
 
@@ -40,29 +36,9 @@ namespace Project.Scripts.UI
         public static UIManager instance;
         public GameManager gameManager;
 
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-                // DontDestroyOnLoad(gameObject);
-            }
-            // else
-            // {
-                // Debug.Log("UIManager already exists, destroying this instance.");
-                // DontDestroyOnLoad(gameObject); // Destroy duplicate UIManager
-            // }
-        }
         
-        public void RegisterPlayer(TopDownController controller)
-        {
-            playerController = controller;
 
-            var menuAction = playerController.PlayerInput.actions["Menu"];
-            menuAction.performed += ctx => TogglePause();
-        }
-
-        private void TogglePause()
+        public void TogglePause()
         {
             if (gameManager.PausedStateEnum == pausedState.Playing)
                 PauseGame();
@@ -81,30 +57,24 @@ namespace Project.Scripts.UI
         }
 
 
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
         
         private void Start()
         {
-            // _playerObject = GameManager.Instance.Player;
             gameManager = GameManager.Instance;
-            
-            playerController = Object.FindFirstObjectByType<TopDownController>();
-        
-            InputActionMap playerActionMap = playerController.PlayerInput.actions.FindActionMap("Player", true);
-            _menuAction = playerActionMap.FindAction("Menu");
-            _menuAction.performed += ctx =>
-            {
-                if (gameManager.PausedStateEnum == pausedState.Playing)
-                    PauseGame();
-                else if (gameManager.PausedStateEnum == pausedState.Paused)
-                    ResumeGame();
-            };
-
-            
-            
-            SceneManager.activeSceneChanged += OnSceneChanged;
-            
-            
-            OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
+            // SceneManager.activeSceneChanged += OnSceneChanged;
+            // OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
 
         }
@@ -115,13 +85,6 @@ namespace Project.Scripts.UI
             if (next.name == "MainMenu")
             {
                 LevelManager.Instance.SetActionMapToUI();
-                showTitleScreen();
-                if (LevelManager.Instance.showLevelSelect)
-                {
-                    ShowLevelSelect();
-                    LevelManager.Instance.showLevelSelect = false;
-                }
-
                 return;
             }
             
@@ -147,20 +110,6 @@ namespace Project.Scripts.UI
         {
             pauseMenu.SetActive(false);
         }
-        //
-        // public void ShowLevelCompleteCanvas()
-        // {
-        //     //if last level, don't show next level button
-        //     if (SceneManager.GetActiveScene().name == "Level 3")
-        //     {
-        //         nextLevelButton.SetActive(false);
-        //     }
-        //     else
-        //     {
-        //         nextLevelButton.SetActive(true);
-        //     }
-        //     levelCompleteCanvas.SetActive(true);
-        // }
     
         
         public void PauseGame()
@@ -168,21 +117,16 @@ namespace Project.Scripts.UI
             Time.timeScale = 0;
             GameManager.Instance.SetPausedState(pausedState.Paused);
             ShowPauseMenu();
-    
-            //todo
-            //  when paused, you can maybe make a cycling animation of stars in the background
-        
         }
 
         public void ResumeGame()
         {
             Time.timeScale = 1;
-            GameManager.Instance.SetPausedState(pausedState.Paused);
+            GameManager.Instance.SetPausedState(pausedState.Playing);
             HidePauseMenu();
         }
 
     
-        // Scene & Level Management
 
         public IEnumerator FadeToBlack()
         {
@@ -224,21 +168,10 @@ namespace Project.Scripts.UI
         }
 
         
-
-        public void ShowLevelSelect()
-        {
-            HideAllUI();
-            Util.SetActiveWithParents(levelSelectCanvas, true);
-        }
-    
-
     
 
         public void HideAllUI()
         {
-            // mainMenu.SetActive(false);
-            levelSelectCanvas.SetActive(false);
-            levelCompleteCanvas.SetActive(false);
             playerHUD.SetActive(false);
             pauseMenu.SetActive(false);
         }
@@ -251,7 +184,7 @@ namespace Project.Scripts.UI
 
         public void showTitleScreen()
         {
-            Util.SetActiveWithParents(TitleScreenCanvas, true);
+            SceneManager.LoadScene("MainMenu");
         }
 
 

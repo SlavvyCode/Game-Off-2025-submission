@@ -52,9 +52,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Menu",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "52aa2a81-82ee-4535-9910-7f520b94c224",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sneak",
+                    "type": "Button",
+                    "id": "34babe38-d4f9-4496-ac47-e64a4bd53b1c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Scream",
+                    "type": "Button",
+                    "id": "2c89234c-027c-4e8d-9b26-2ce658565e6b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ResetDebug",
+                    "type": "Button",
+                    "id": "76b9c16f-ee3e-472e-a54f-981ee0fe15c5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -168,18 +195,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Menu",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a472c3bf-6034-4179-9913-1f927575b57f",
-                    "path": "",
+                    "id": "fbb143dc-da4e-4732-951c-aa6c8c47c8ce",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Menu",
+                    "action": "Sneak",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95a4a3ea-db9d-4747-9761-3ddca8b1b8ff",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scream",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7f6b1b9-d553-420a-9125-c354edc08c50",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

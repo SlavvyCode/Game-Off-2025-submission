@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c140686ed644def909e78d5a6a5dc07, type: 3}
+  m_Name: rockSoundSet
+  m_EditorClassIdentifier: Assembly-CSharp::SoundSet
+  variations:
+  - {fileID: 11400000, guid: a5b2d344c4996904892ae799e045814f, type: 2}
+  - {fileID: 11400000, guid: 6edcf6a03a3e4da408e27dddc8d904a6, type: 2}
+  - {fileID: 11400000, guid: 993a7d6e680410141950a91f8d11f7e7, type: 2}
+  - {fileID: 11400000, guid: 1b251bfdf5e6ce74a884c15857780c6d, type: 2}
+  - {fileID: 11400000, guid: ddca6abb23a21274f8981544f7c64b5e, type: 2}

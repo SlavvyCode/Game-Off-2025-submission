@@ -12,7 +12,7 @@ namespace Project.Scripts.Player
         [SerializeField] private int minThrowStrength = 10;
         [SerializeField] int throwStrength = 0;
         [SerializeField] int maxThrowStrength = 100;
-        [SerializeField] int rockCount = 0; 
+        [SerializeField] public int rockCount = 0; 
         [SerializeField] private float throwConstant = 0.5f;
         
             

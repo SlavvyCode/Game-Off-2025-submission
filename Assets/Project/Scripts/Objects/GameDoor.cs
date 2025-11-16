@@ -1,16 +1,19 @@
 using System;
+using Project.Scripts.Sound;
 using UnityEngine;
 
-public class GameDoor : ButtonTarget
+public class GameDoor : LeverTarget
 {
     private Collider2D doorCollider;
     private SpriteRenderer doorSpriteRenderer;
     bool isOpen = false;
+    [SerializeField] private SoundData openDoorSFX;
     private void Awake()
     {
         doorCollider = GetComponent<Collider2D>();
         doorSpriteRenderer = GetComponent<SpriteRenderer>();
     }
+    
     
     public void ToggleOpenClose()
     {
@@ -40,7 +43,7 @@ public class GameDoor : ButtonTarget
     
     private void doorSFX()
     {
-        // throw new NotImplementedException();
+        AudioManager.Instance.PlaySound(openDoorSFX, transform.position);
     }
     
     private void doorVFX()
@@ -51,8 +54,8 @@ public class GameDoor : ButtonTarget
     
     public void Close()
     {
+        doorSFX();
         isOpen = false;
-        //reappear
         doorCollider.enabled = true;
         doorSpriteRenderer.enabled = true;
     }

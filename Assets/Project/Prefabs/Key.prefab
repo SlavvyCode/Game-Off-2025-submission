@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7393546867796085182}
   - component: {fileID: 5125121305918813460}
   - component: {fileID: 5263189424298657667}
+  - component: {fileID: 6642915618904267778}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -104,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e593bb7c434711ba59d82a3801f3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.KeyItem
-  pairedButton: {fileID: 0}
+  keyType: 0
 --- !u!61 &5263189424298657667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +152,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6642915618904267778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372412706647288363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36772b22ed84f70a77488178e2e566f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.SaveableObject
+  uniqueID: 76bf1d31-b761-4e2a-b85e-af5c0538f862

@@ -18,7 +18,6 @@ namespace General_and_Helpers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -67,7 +66,7 @@ namespace General_and_Helpers
 
         public void KillPlayer()
         {
-            // LevelManager.Instance.ResetAtCheckpoint();
+            LevelManager.Instance.ResetAtCheckpoint();
         }
     }
 }
