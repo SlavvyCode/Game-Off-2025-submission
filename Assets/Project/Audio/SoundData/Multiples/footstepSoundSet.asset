@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c140686ed644def909e78d5a6a5dc07, type: 3}
+  m_Name: footstepSoundSet
+  m_EditorClassIdentifier: Assembly-CSharp::SoundSet
+  variations:
+  - {fileID: 11400000, guid: 0b5d2df81338a234b839f4a87676b4f7, type: 2}
+  - {fileID: 11400000, guid: 9100fc52887776d49925cc6d1866d825, type: 2}
+  - {fileID: 11400000, guid: adb8705cdf64fcb419a204f990553dd8, type: 2}
+  - {fileID: 11400000, guid: ae3f814bcec5c3f4890a84ace895aa49, type: 2}
+  - {fileID: 11400000, guid: 2f180fa59b1378646b12f59315ea0d1d, type: 2}
+  - {fileID: 11400000, guid: fa920af5f7c703249b7624c117c7fe6f, type: 2}
+  - {fileID: 11400000, guid: 1ab0475a0fa68bb40a8d1f0ee6d24f0a, type: 2}
+  - {fileID: 11400000, guid: 1436e5a64448b2b4583b41405a7c2e49, type: 2}
+  - {fileID: 11400000, guid: 037beb810a48c25418f374d99ca5b74d, type: 2}
+  - {fileID: 11400000, guid: f4f674840be2cfe4f9600883ea878169, type: 2}
+  - {fileID: 11400000, guid: b0be8a9ee572a2d499b3fdc7a3a6d310, type: 2}
+  - {fileID: 11400000, guid: 145ce4d9d0b155643b975a9f473822a8, type: 2}

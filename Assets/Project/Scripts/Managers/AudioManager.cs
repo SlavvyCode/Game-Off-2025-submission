@@ -24,4 +24,30 @@ public class AudioManager : MonoBehaviour
         var emitter = Instantiate(emitterPrefab);
         emitter.Play(data, position);
     }
+    
+    public void PlaySound(SoundData data, Vector2 position, float volumeMult)
+    {
+        var emitter = Instantiate(emitterPrefab);
+        emitter.Play(data, position, volumeMult);
+    }
+    
+    public void PlaySoundGlobal(SoundData data)
+    {
+        if (data == null || data.clip == null)
+        {
+            Debug.LogWarning("Attempted to play null sound globally.");
+            return;
+        }
+        
+        var go = new GameObject("GlobalSound_" + data.clip.name);
+        var src = go.AddComponent<AudioSource>();
+
+        src.clip = data.clip;
+        src.volume = data.volume;
+        src.spatialBlend = 0f; // force 2D
+        src.Play();
+
+        Destroy(go, src.clip.length + 0.1f);
+    }
+
 }

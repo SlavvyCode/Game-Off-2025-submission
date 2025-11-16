@@ -8994,6 +8994,10 @@ PrefabInstance:
       propertyPath: screamSound
       value: 
       objectReference: {fileID: 11400000, guid: ddca6abb23a21274f8981544f7c64b5e, type: 2}
+    - target: {fileID: 6421122890084793713, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
+      propertyPath: footstepSounds
+      value: 
+      objectReference: {fileID: 11400000, guid: d28a2a0807098d548a2d954eea1df1bf, type: 2}
     - target: {fileID: 8617612170533726458, guid: eca0c1428b5e5d549b5be72b6ed8640b, type: 3}
       propertyPath: m_Name
       value: Player

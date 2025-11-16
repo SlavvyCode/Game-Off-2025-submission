@@ -19,6 +19,12 @@ public class TopDownController : MonoBehaviour
     private Cooldown screamCooldown = new Cooldown(5f);
     
     [SerializeField] private SoundData screamSound;
+    [SerializeField] private SoundSet footstepSounds;
+    
+    [SerializeField] private float stepInterval = 0.35f; // adjust for walk speed
+    private float nextStepTime = 0f;
+    [SerializeField] private float crouchStepMultiplier = 1.7f; // 1.70x slower
+    
 
     // private Camera mainCam;
 
@@ -126,6 +132,45 @@ public class TopDownController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+    }
+
+    private void Update()
+    {
+        PlayFootstepIfMoving();
+    }
+
+    private void PlayFootstepIfMoving()
+    {
+        var footstepSound = footstepSounds.GetRandom();
+            if (!movementEnabled)
+                return;
+
+            if (movementDirection == Vector2.zero)
+                return;
+
+            if (Time.time < nextStepTime)
+                return;
+
+            // actually moving?
+            // if (_rb.linearVelocity.sqrMagnitude  <0.1f)
+                // return;
+
+                var interval = GetCurrentStepInterval();
+            AudioManager.Instance.PlaySound(footstepSound, gameObject.transform.position, sneaking ? .5f : 1);
+            // AudioManager.Instance.PlaySoundGlobal(footstepSound);
+
+            nextStepTime = Time.time + interval;
+    }
+    
+    private float GetCurrentStepInterval()
+    {
+        float interval = stepInterval;
+
+        if (sneaking)
+            interval *= crouchStepMultiplier;
+        
+
+        return interval;
     }
 
 }
