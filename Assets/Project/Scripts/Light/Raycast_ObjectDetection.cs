@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using static UnityEngine.UI.Image;
 
@@ -12,6 +15,9 @@ public class Raycast_ObjectDetection : MonoBehaviour
     public int rayCount = 60;              // počet paprsků, např. každých 2°
     public float maxDistance = 5f;          // maximální dosah vlny
     public LayerMask obstacleLayer;         // vrstva pro kolize (překážky)
+    public GameObject shadowOnEnd;
+    public Light2D lightSource;
+    public float LifeTime = 10f;
 
     Texture2D visibilityMask;
     Color[] pixels;
@@ -44,6 +50,26 @@ public class Raycast_ObjectDetection : MonoBehaviour
             Effect();
             previousPos = this.transform.position;
         }
+
+        StartCoroutine(kill());
+    }
+    public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
+    public float endDuration = 1f; // délka přechodu v sekundách
+
+    public Vector3 initialScale;
+    private float elapsedTime = 0f;
+    private IEnumerator kill()
+    {
+        yield return new WaitForSeconds(LifeTime);
+        if (elapsedTime < endDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / endDuration);
+            shadowOnEnd.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+            lightSource.intensity = Mathf.Lerp(1, 0, t);
+        }
+        yield return new WaitForSeconds(endDuration);
+        Destroy(gameObject);
     }
     
     private void Effect()
