@@ -17,9 +17,9 @@ public class Inventory : MonoBehaviour
         return keys.Contains(key);
     }
     
-    public KeyItem HasKeyToButton(InteractableButton button)
+    public KeyItem HasKeyToButton(InteractableLever lever)
     {
-        var desiredKey = keys.Find(k => k.pairedButton == button);
+        var desiredKey = keys.Find(k => k.pairedLever == lever);
         if (desiredKey == null)
         {
             return null;

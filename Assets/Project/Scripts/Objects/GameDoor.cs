@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class GameDoor : ButtonTarget
+public class GameDoor : LeverTarget
 {
     private Collider2D doorCollider;
     private SpriteRenderer doorSpriteRenderer;

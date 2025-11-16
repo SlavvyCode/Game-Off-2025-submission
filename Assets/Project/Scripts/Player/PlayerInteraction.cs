@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
                 var interactable = hitCollider.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
-                    interactable.Use();
+                    interactable.Use(gameObject);
                     break; 
                 }
             }

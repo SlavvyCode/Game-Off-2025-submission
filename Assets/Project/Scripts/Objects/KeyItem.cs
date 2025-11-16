@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Project.Scripts.Objects
 {
     public class KeyItem : MonoBehaviour
     {
-        [SerializeField] public InteractableButton pairedButton;
+        [FormerlySerializedAs("pairedButton")] [SerializeField] public InteractableLever pairedLever;
         private Collider2D keyCollider;
         
         private void Start()
