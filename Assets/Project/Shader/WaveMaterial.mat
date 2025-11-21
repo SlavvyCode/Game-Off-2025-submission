@@ -85,10 +85,12 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Slowing: 0.002
+    - _StartTime: 0
+    - _Time: 0
     - _WaveSpeed: 2
     - _WaveStrengh: 10
     - _WaveStrength: 40
-    - _WavesCount: 4
+    - _WavesCount: 1
     - _ZWrite: 0
     m_Colors:
     - _BackroundColor: {r: 0, g: 0, b: 0, a: 0}
