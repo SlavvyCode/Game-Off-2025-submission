@@ -200,10 +200,11 @@ MonoBehaviour:
   - {fileID: 219251857260922181}
   PlayerTransform: {fileID: 0}
   playerLastKnownPosition: {x: 0, y: 0}
-  chasingStartDistance: 1
+  chasingStartDistance: 7
   chasingStopDistance: 0.2
   hissSound: {fileID: 11400000, guid: b93ff1d26298f6c4784c97760219bba6, type: 2}
   warningHissSound: {fileID: 11400000, guid: 9f73677adb1c0144ea7b00c2b487ecbd, type: 2}
+  echoSoundPrefab: {fileID: 1064003233415522675, guid: 936056097f0d4514ca2164ef1eaa63cd, type: 3}
   hissMinDelay: 3
   hissMaxDelay: 8
   warningDistance: 1.5
