@@ -9,11 +9,11 @@ public class SVGCollider : MonoBehaviour {
 
 
     public GameObject gameObjectToColide;
-    public string assetFileLocation, VectorSpritePreset, TexturedSpritePreset;
+    public string assetFileLocation, vectorSpritePreset, texturedSpritePreset;
     public TypeOfCollider type;
     private void Start()
     {
-        AddCollider(gameObjectToColide, assetFileLocation, VectorSpritePreset, TexturedSpritePreset, type);
+        AddCollider(gameObjectToColide, assetFileLocation, vectorSpritePreset, texturedSpritePreset, type);
     }
     public enum TypeOfCollider
     {

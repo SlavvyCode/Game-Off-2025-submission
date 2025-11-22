@@ -31,7 +31,8 @@ public class TopDownController : MonoBehaviour
     // private Camera mainCam;
 
     Vector2 targetMovePosition;
-    
+    public GameObject SoundWave;
+
     public PlayerInput PlayerInput { get; private set; }    
     private InputAction _attackAction;
     private InputAction _jumpAction;
@@ -86,6 +87,7 @@ public class TopDownController : MonoBehaviour
         animator.SetBool("isScreaming", true);
         screamCooldown.Use();
         AudioManager.Instance.PlaySound(screamSound, transform.position);
+        Instantiate(SoundWave, transform.position, Quaternion.identity);
 
         StartCoroutine(DisableMovementForSeconds(screamSound.clip.length));
         StartCoroutine(SetDisableScreamAnimation(screamSound.clip.length));

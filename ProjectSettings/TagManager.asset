@@ -50,5 +50,8 @@ TagManager:
   - name: Objects
     uniqueID: 3293022775
     locked: 0
+  - name: Map
+    uniqueID: 602364313
+    locked: 0
   m_RenderingLayers:
   - Default
