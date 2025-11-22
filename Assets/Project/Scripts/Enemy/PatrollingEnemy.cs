@@ -129,6 +129,13 @@ public class PatrollingEnemy : AbstractEnemy
             Debug.LogError("NavMeshMissing");
         }
     }
+    
+    public void HearSound(Vector2 soundPos)
+    {
+        chasingPlayer = true;
+        playerLastKnownPosition = soundPos;
+    }
+
 
     private void TryPlayPatrolHiss()
     {
