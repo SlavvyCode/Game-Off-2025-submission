@@ -1,7 +1,8 @@
-using System;
-using System.Collections.Generic;
 using General_and_Helpers;
 using Project.Scripts.Sound;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -41,8 +42,28 @@ public class PatrollingEnemy : AbstractEnemy
 
     private float nextHissTime = 0f;
 
-    
-    
+    public float stunDelayInSecond = 2;
+    private bool inStun = false;
+    IEnumerator GetStun()
+    {
+        inStun = true;
+        navMeshAgent.SetDestination(transform.position);
+        yield return new WaitForSeconds(stunDelayInSecond);
+        inStun = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Stone") && !inStun)
+        {
+            if (Math.Abs(collision.GetComponent<Rigidbody2D>().linearVelocity.x) + 
+                Math.Abs(collision.GetComponent<Rigidbody2D>().linearVelocity.y) > 5)
+            {
+                print("Got hit by rock!");
+                GetStun();
+            }
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -61,45 +82,48 @@ public class PatrollingEnemy : AbstractEnemy
 
     public override void EnemyBehavior()
     {
-        setChasingPlayerStatus();
-        
-
-        if (!chasingPlayer)
+        if (!inStun)
         {
-            Patrol();
-        }
-        else
-        {
-            ChasePlayer();
+            setChasingPlayerStatus();
+            if (!chasingPlayer)
+            {
+                Patrol();
+            }
+            else
+            {
+                ChasePlayer();
+            }
         }
     }
 
     private void setChasingPlayerStatus()
     {
-        if (!chasingPlayer)
+        if (!inStun)
         {
-            // placeholder logic for now - if close to player, chase
-            if (PlayerTransform == null)
+            if (!chasingPlayer)
             {
-                PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            }
-            float distanceToPlayer = Vector2.Distance(transform.position, PlayerTransform.position);
-            if (distanceToPlayer < chasingStartDistance)
-            {
-                chasingPlayer = true;
-                playerLastKnownPosition = PlayerTransform.position;
-            }
-            
-        }
-        if (chasingPlayer)
-        {
-            // stop chasing when reached last known position
-            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < chasingStopDistance)
-            {
-                chasingPlayer = false;
-            }
-        }
+                // placeholder logic for now - if close to player, chase
+                if (PlayerTransform == null)
+                {
+                    PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+                }
+                float distanceToPlayer = Vector2.Distance(transform.position, PlayerTransform.position);
+                if (distanceToPlayer < chasingStartDistance)
+                {
+                    chasingPlayer = true;
+                    playerLastKnownPosition = PlayerTransform.position;
+                }
 
+            }
+            if (chasingPlayer)
+            {
+                // stop chasing when reached last known position
+                if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < chasingStopDistance)
+                {
+                    chasingPlayer = false;
+                }
+            }
+        }
     }
 
     private void Patrol()
@@ -116,8 +140,8 @@ public class PatrollingEnemy : AbstractEnemy
         
         if (target == null || patrolPoints.Count == 0) return;
 
-        try
-        {
+
+        try { 
             navMeshAgent.SetDestination(target.position);
 
             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.3f)
@@ -164,8 +188,5 @@ public class PatrollingEnemy : AbstractEnemy
     {
         // no need, just run into them
     }
-    
-    
-    
-
+   
 }

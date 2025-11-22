@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 6180488361227263252}
   - component: {fileID: 2922253615462749022}
   - component: {fileID: 5509312214162156899}
-  - component: {fileID: 3341762082237152409}
   - component: {fileID: 2299851190237641286}
+  - component: {fileID: 3341762082237152409}
   m_Layer: 0
   m_Name: PatrollingEnemy
   m_TagString: Untagged
@@ -207,18 +207,7 @@ MonoBehaviour:
   hissMinDelay: 3
   hissMaxDelay: 8
   warningDistance: 1.5
---- !u!114 &3341762082237152409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3115380807411085327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.AgentOverride2d
+  stunDelayInSecond: 2
 --- !u!61 &2299851190237641286
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -253,7 +242,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.012167573, y: -0.11044425}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -263,8 +252,20 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.7510326, y: 0.49083388}
   m_EdgeRadius: 0
+--- !u!114 &3341762082237152409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115380807411085327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Extensions.AgentOverride2d
 --- !u!1 &7289132039276263361
 GameObject:
   m_ObjectHideFlags: 0
