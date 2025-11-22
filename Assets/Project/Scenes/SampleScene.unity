@@ -1118,14 +1118,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.07411983
-    width: 0.4341927
-    height: 0.44471896
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -29379,6 +29379,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8945937093814431485, guid: e56cc102e79b3f048a0fe813d903a665, type: 3}
+      propertyPath: leverSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 55fa7396b9d5f1f458e7cf6cbe1f7b78, type: 2}
     - target: {fileID: 8945937093814431485, guid: e56cc102e79b3f048a0fe813d903a665, type: 3}
       propertyPath: pairedObject
       value: 

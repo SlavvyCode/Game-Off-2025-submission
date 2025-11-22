@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2069481609917296239}
   - component: {fileID: 750220716465765682}
   - component: {fileID: 1316746543519540144}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   leverOffSprite: {fileID: 21300000, guid: 8d46e46230a78e84786c68a1c482b275, type: 3}
   leverOnSprite: {fileID: 21300000, guid: 496c0a443643d4840ba9d99f7b3b06bb, type: 3}
   pairedObject: {fileID: 0}
-  leverSound: {fileID: 0}
+  leverSound: {fileID: 11400000, guid: 55fa7396b9d5f1f458e7cf6cbe1f7b78, type: 2}
 --- !u!61 &2069481609917296239
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0017481744, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -97,7 +97,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.52094746, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &750220716465765682
 SpriteRenderer:
@@ -169,4 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36772b22ed84f70a77488178e2e566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.SaveableObject
-  uniqueID: 6a65630f-3061-43c1-b7bb-c0a14b070555
+  uniqueID: 2f50a934-4cab-42b6-8cae-26cba73a954b
