@@ -46,6 +46,23 @@ public class TopDownController : MonoBehaviour
         // mainCam = Camera.main;
     }
 
+    private void OnEnable()
+    {       var c = PlayerInput.actions;
+            c["Scream"].started += Scream;
+            c["Movement"].performed += OnMoveControls;
+            c["Movement"].canceled += OnMoveControls;
+            
+    }
+
+
+    private void OnDisable()
+    {
+        var c = PlayerInput.actions;
+        c["Scream"].started -= Scream;
+        c["Movement"].performed -= OnMoveControls;
+        c["Movement"].canceled -= OnMoveControls;
+    }
+
     private void Start()
     {
         // UIManager.instance.RegisterPlayer(this);
