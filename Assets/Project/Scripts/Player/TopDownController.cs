@@ -15,8 +15,8 @@ public class TopDownController : MonoBehaviour
     public float speed = 12.5f;
     // public float turnRate = 200.0f;
     public bool movementEnabled = true;
-    
-    private Cooldown screamCooldown = new Cooldown(5f);
+    [SerializeField] private float screamCooldownTime = 5f;
+    private Cooldown screamCooldown;
     
     [SerializeField] Animator animator;
     
@@ -45,7 +45,12 @@ public class TopDownController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         PlayerInput = GetComponent<PlayerInput>();
         // mainCam = Camera.main;
+        
+       screamCooldown = new Cooldown(screamCooldownTime);
     }
+    
+    
+    
 
     private void OnEnable()
     {       var c = PlayerInput.actions;
