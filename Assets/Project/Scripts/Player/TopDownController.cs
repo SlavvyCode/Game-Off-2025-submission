@@ -243,8 +243,9 @@ public class TopDownController : MonoBehaviour
 
             Instantiate(StepSoundWave, transform.position, Quaternion.identity);
             
-            var stepNotifyRadius = sneaking ? 3.5f : 7f;
-            NotifyEnemies(transform.position,stepNotifyRadius );
+            //only notify enemies if not sneaking
+            if(!sneaking)
+                NotifyEnemies(transform.position, 7);
 
             nextStepTime = Time.time + interval;
     }
