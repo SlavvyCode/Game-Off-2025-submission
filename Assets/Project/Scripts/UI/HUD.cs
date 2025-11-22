@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Project.Scripts.Objects;
 using TMPro;
@@ -24,7 +25,11 @@ public class HUDManager : MonoBehaviour
         Instance = this;
     }
 
-    
+    private void Start()
+    {
+        HUDKeyContainer.SetActive(false);
+    }
+
     public void UpdateKeys(Inventory inventory)
     {
         // Clear container
@@ -49,6 +54,14 @@ public class HUDManager : MonoBehaviour
             // TMP_Text countText = keyIcon.GetComponentInChildren<TMP_Text>(true);
             // if (countText != null)
                 // countText.text = count > 1 ? $"x{count}" : "";
+        }
+        if (inventory.keys.Count > 0)
+        {
+            HUDKeyContainer.SetActive(true);
+        }
+        else
+        {
+            HUDKeyContainer.SetActive(false);
         }
     }
 
