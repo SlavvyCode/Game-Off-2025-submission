@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Project.Scripts.Sound;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class PatrollingEnemy : AbstractEnemy
 {
@@ -100,12 +102,20 @@ public class PatrollingEnemy : AbstractEnemy
         
         if (target == null || patrolPoints.Count == 0) return;
 
-        navMeshAgent.SetDestination(target.position);
-
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.3f)
+        try
         {
-            currentIndex = (currentIndex + 1) % patrolPoints.Count;
-            target = patrolPoints[currentIndex];
+            navMeshAgent.SetDestination(target.position);
+
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.3f)
+            {
+                currentIndex = (currentIndex + 1) % patrolPoints.Count;
+                target = patrolPoints[currentIndex];
+            }
+
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("NavMeshMissing");
         }
     }
 
