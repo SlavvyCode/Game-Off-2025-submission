@@ -3,13 +3,6 @@ using General_and_Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
-using Project.Scripts.UI;
-using Unity.Cinemachine;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace Project.Scripts.UI
 {
