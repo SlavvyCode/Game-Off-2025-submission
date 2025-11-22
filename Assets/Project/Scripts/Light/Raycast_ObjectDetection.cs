@@ -13,11 +13,18 @@ public class Raycast_ObjectDetection : MonoBehaviour
 {
     [Header("Nastavení raycastování")]
     public int rayCount = 60;              // počet paprsků, např. každých 2°
-    public float maxDistance = 5f;          // maximální dosah vlny
     public LayerMask obstacleLayer;         // vrstva pro kolize (překážky)
     public GameObject shadowOnEnd;
-    public Light2D lightSource;
-    public float LifeTime = 10f;
+    public SpriteRenderer sr;
+    public Vector3 objectFinalScale = new Vector3(5f, 5f, 5f); // cílová velikost
+    public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
+    public float endDuration = 1.5f; // délka přechodu v sekundách
+
+    public Vector3 initialScale;
+    private float elapsedTime = 0f;
+    private float startTime = 0f;
+
+    float maxDistance = 5f;          // maximální dosah vlny
 
     Texture2D visibilityMask;
     Color[] pixels;
@@ -30,8 +37,10 @@ public class Raycast_ObjectDetection : MonoBehaviour
     float angle;
     float rad;
     Vector3 previousPos = Vector2.zero;
+
     void Start()
     {
+
         Renderer renderer = GetComponent<Renderer>();
         renderer.material = Instantiate(renderer.material);
 
@@ -39,7 +48,11 @@ public class Raycast_ObjectDetection : MonoBehaviour
         polygonPoints = new Vector2[rayCount];
 
         InitializeMask(rayCount);
+        endDuration = endDuration / renderer.material.GetFloat("_WaveSpeed");
         renderer.material.SetTexture("_VisibilityMask", visibilityMask);
+        renderer.material.SetFloat("_StartTime",Time.time + 2f );
+        transform.localScale = objectFinalScale;
+        maxDistance = objectFinalScale.x / 2;
         //this.GetComponent<SpriteRenderer>().enabled = false;
         Effect();
     }
@@ -51,29 +64,30 @@ public class Raycast_ObjectDetection : MonoBehaviour
             Effect();
             previousPos = this.transform.position;
         }*/
-
+        
         StartCoroutine(kill());
     }
-    public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
-    public float endDuration = 1f; // délka přechodu v sekundách
-
-    public Vector3 initialScale;
-    private float elapsedTime = 0f;
     private IEnumerator kill()
     {
-        Effect();
-        yield return new WaitForSeconds(LifeTime);
+        StartGrowing();
         if (elapsedTime < endDuration)
         {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / endDuration);
-            shadowOnEnd.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
-            lightSource.intensity = Mathf.Lerp(1, 0, t);
+            shadowOnEnd.transform.localScale = Vector3.Lerp(Vector3.zero, new Vector3(1, 1, 1), t);
+            sr.color = new Color(Mathf.Lerp(1, 0, t), Mathf.Lerp(1, 0, t), Mathf.Lerp(1, 0, t), Mathf.Lerp(1, 0, t));
         }
         yield return new WaitForSeconds(endDuration);
         Destroy(gameObject);
     }
-    
+    private void StartGrowing()
+    {
+        Effect();
+        startTime += Time.deltaTime;
+        float t = 0; // Mathf.Clamp01(startTime / (LifeTime));
+        sr.color = new Color(Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t));
+    }
+
     private void Effect()
     {
         //this.GetComponent<SpriteRenderer>().enabled = true;
