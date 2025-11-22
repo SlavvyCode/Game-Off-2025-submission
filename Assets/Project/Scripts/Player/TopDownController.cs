@@ -233,6 +233,9 @@ public class TopDownController : MonoBehaviour
             // AudioManager.Instance.PlaySoundGlobal(footstepSound);
 
             Instantiate(StepSoundWave, transform.position, Quaternion.identity);
+            
+            var stepNotifyRadius = sneaking ? 3.5f : 7f;
+            NotifyEnemies(transform.position,stepNotifyRadius );
 
             nextStepTime = Time.time + interval;
     }

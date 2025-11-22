@@ -48,8 +48,9 @@ public class PatrollingEnemy : AbstractEnemy
     IEnumerator GetStun()
     {
         inStun = true;
-        navMeshAgent.SetDestination(transform.position);
+        navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(stunDelayInSecond);
+        navMeshAgent.isStopped = false;
         inStun = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,8 +60,9 @@ public class PatrollingEnemy : AbstractEnemy
             if (Math.Abs(collision.GetComponent<Rigidbody2D>().linearVelocity.x) + 
                 Math.Abs(collision.GetComponent<Rigidbody2D>().linearVelocity.y) > 5)
             {
-                print("Got hit by rock!");
-                GetStun();
+                // print("Got hit by rock!");
+                StartCoroutine(GetStun());
+                Destroy(collision.gameObject);
             }
         }
     }
