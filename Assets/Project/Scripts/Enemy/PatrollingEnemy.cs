@@ -34,6 +34,7 @@ public class PatrollingEnemy : AbstractEnemy
     [SerializeField]
     private SoundData warningHissSound;
     
+    [SerializeField] GameObject echoSoundPrefab;
     
     [SerializeField] private float hissMinDelay = 3f;
     [SerializeField] private float hissMaxDelay = 8f;
@@ -147,6 +148,7 @@ public class PatrollingEnemy : AbstractEnemy
 
         // otherwise regular ambience patrol hiss
         AudioManager.Instance.PlaySound(hissSound, transform.position);
+        Instantiate(echoSoundPrefab, transform.position, Quaternion.identity);
 
         // random delay before next hiss to make it feel natural
         nextHissTime = Time.time + Random.Range(hissMinDelay, hissMaxDelay);
