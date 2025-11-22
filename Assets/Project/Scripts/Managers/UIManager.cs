@@ -31,7 +31,7 @@ namespace Project.Scripts.UI
         [SerializeField] private GameObject nextLevelButton;
 
         private TopDownController playerController;
-
+        [SerializeField] private GameObject tutorialCanvas;
     
    
         public static UIManager instance;
@@ -47,6 +47,14 @@ namespace Project.Scripts.UI
                 ResumeGame();
         }
 
+        
+        public void HideTutorial()
+        {
+            if (tutorialCanvas != null)
+            {
+                tutorialCanvas.SetActive(false);
+            }
+        }
         private void OnDestroy()
         {
             if (instance == this)

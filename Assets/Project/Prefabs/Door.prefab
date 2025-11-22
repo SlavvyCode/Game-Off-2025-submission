@@ -150,3 +150,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea6adb2a967a7240aa8ac9efd0f0e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDoor
+  openDoorSFX: {fileID: 11400000, guid: d76ca1f31eabf3f44a8ca8bbc2f0fca0, type: 2}

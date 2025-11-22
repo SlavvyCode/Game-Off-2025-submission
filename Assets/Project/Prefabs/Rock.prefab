@@ -216,3 +216,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rock
   throwSoundSet: {fileID: 11400000, guid: 05b15822471e3604ca4f843fd369c42f, type: 2}
+  echoSoundPrefab: {fileID: 1064003233415522675, guid: 936056097f0d4514ca2164ef1eaa63cd, type: 3}

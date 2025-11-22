@@ -12,6 +12,8 @@ public class Rock : MonoBehaviour
     private Collider2D rockCollider;
     
     [SerializeField] private SoundSet throwSoundSet;
+    
+    [SerializeField] private GameObject echoSoundPrefab;
 
 
     
@@ -30,7 +32,20 @@ public class Rock : MonoBehaviour
             OnLand();
         }
     }
+    private void NotifyEnemies(Vector3 pos, float radius)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, radius);
 
+        foreach (var h in hits)
+        {
+            PatrollingEnemy enemy = h.GetComponent<PatrollingEnemy>();
+
+            if (enemy != null)
+            {
+                enemy.HearSound(pos);
+            }
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -39,9 +54,11 @@ public class Rock : MonoBehaviour
             return;
         
         
+        NotifyEnemies(transform.position, 3f);
         
         // play collision sound
         AudioManager.Instance.PlaySound(throwSoundSet.GetRandom(), transform.position);
+        Instantiate(echoSoundPrefab, transform.position, Quaternion.identity);
 
         
         

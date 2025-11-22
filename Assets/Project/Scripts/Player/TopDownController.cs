@@ -108,7 +108,7 @@ public class TopDownController : MonoBehaviour
         if (!screamCooldown.IsReady())
             return;
         
-        NotifyEnemiesOfScream(transform.position, screamAlertRadius);
+        NotifyEnemies(transform.position, screamAlertRadius);
         
         
         animator.SetBool("isScreaming", true);
@@ -121,7 +121,7 @@ public class TopDownController : MonoBehaviour
 
     }
 
-    private void NotifyEnemiesOfScream(Vector3 pos, float radius)
+    private void NotifyEnemies(Vector3 pos, float radius)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(pos, radius);
 
