@@ -16,6 +16,7 @@ namespace Project.Scripts.UI
     public class UIManager : MonoBehaviour
     {
         
+        [SerializeField] private GameObject levelCompleteCanvas;
         
         [SerializeField] private GameObject pauseMenu;
         // [SerializeField] private GameObject levelCompleteCanvas;
@@ -184,7 +185,23 @@ namespace Project.Scripts.UI
         }
 
 
-       
+        public void ShowVictoryScreen()
+        {
+            levelCompleteCanvas.SetActive(true);
+            playerHUD.SetActive(false);
+            
+            // wait a bit then fade to black
+        }
+        
+        
+        public void GoToMainMenu()
+        {
+            Debug.Log("Going to Main Menu");
+            SceneManager.LoadScene("MainMenu");
+        }
+        
+
+
     }
 
   

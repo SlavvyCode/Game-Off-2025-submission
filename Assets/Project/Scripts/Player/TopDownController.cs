@@ -18,6 +18,8 @@ public class TopDownController : MonoBehaviour
     
     private Cooldown screamCooldown = new Cooldown(5f);
     
+    [SerializeField] Animator animator;
+    
     [SerializeField] private SoundData screamSound;
     [SerializeField] private SoundSet footstepSounds;
     
@@ -80,11 +82,20 @@ public class TopDownController : MonoBehaviour
     {
         if (!screamCooldown.IsReady())
             return;
+        
+        animator.SetBool("isScreaming", true);
         screamCooldown.Use();
         AudioManager.Instance.PlaySound(screamSound, transform.position);
 
         StartCoroutine(DisableMovementForSeconds(screamSound.clip.length));
+        StartCoroutine(SetDisableScreamAnimation(screamSound.clip.length));
 
+    }
+
+    private IEnumerator SetDisableScreamAnimation(float clipLength)
+    {
+        yield return new WaitForSeconds(clipLength);
+        animator.SetBool("isScreaming", false);
     }
 
     private IEnumerator DisableMovementForSeconds(float f)
@@ -121,9 +132,27 @@ public class TopDownController : MonoBehaviour
     public void Move()
     {
         if (!movementEnabled)
+        {
+            animator.SetBool("isRunning", false);
             return;
+        }
+
         if (movementDirection == Vector2.zero)
+        {
+            animator.SetBool("isRunning", false);
             return; // No movement input, exit early
+        }
+        
+        if (movementDirection.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (movementDirection.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        
+        animator.SetBool("isRunning", true);
         targetMovePosition = (Vector2)transform.position + movementDirection.normalized * speed * Time.deltaTime;
         _rb.MovePosition(targetMovePosition);
     }
