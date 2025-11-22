@@ -42,6 +42,7 @@ public class PatrollingEnemy : AbstractEnemy
     private float nextHissTime = 0f;
 
     
+    
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -54,6 +55,8 @@ public class PatrollingEnemy : AbstractEnemy
     void Start()
     {
         Initialize();
+        target = patrolPoints[0];
+
     }
 
     public override void EnemyBehavior()
