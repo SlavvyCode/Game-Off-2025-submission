@@ -19,6 +19,7 @@ public class Raycast_ObjectDetection : MonoBehaviour
     public Vector3 objectFinalScale = new Vector3(5f, 5f, 5f); // cílová velikost
     public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
     public float endDuration = 1.5f; // délka přechodu v sekundách
+    public bool coliderDetector = false;
 
     public Vector3 initialScale;
     private float elapsedTime = 0f;
@@ -43,18 +44,21 @@ public class Raycast_ObjectDetection : MonoBehaviour
 
         Renderer renderer = GetComponent<Renderer>();
         renderer.material = Instantiate(renderer.material);
-
-        distances = new float[rayCount];
-        polygonPoints = new Vector2[rayCount];
-
-        InitializeMask(rayCount);
+        renderer.material.SetFloat("_StartTime", Time.time + 2f);
         endDuration = endDuration / renderer.material.GetFloat("_WaveSpeed");
-        renderer.material.SetTexture("_VisibilityMask", visibilityMask);
-        renderer.material.SetFloat("_StartTime",Time.time + 2f );
         transform.localScale = objectFinalScale;
-        maxDistance = objectFinalScale.x / 2;
-        //this.GetComponent<SpriteRenderer>().enabled = false;
-        Effect();
+
+        if (coliderDetector)
+        {
+            distances = new float[rayCount];
+            polygonPoints = new Vector2[rayCount];
+
+            InitializeMask(rayCount);
+            renderer.material.SetTexture("_VisibilityMask", visibilityMask);
+            maxDistance = objectFinalScale.x / 2;
+            //this.GetComponent<SpriteRenderer>().enabled = false;
+            Effect();
+        }
     }
 
     private void Update()
@@ -82,10 +86,10 @@ public class Raycast_ObjectDetection : MonoBehaviour
     }
     private void StartGrowing()
     {
-        Effect();
-        startTime += Time.deltaTime;
-        float t = 0; // Mathf.Clamp01(startTime / (LifeTime));
-        sr.color = new Color(Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t), Mathf.Lerp(0,1, t));
+        if (coliderDetector)
+        {
+            Effect();
+        }
     }
 
     private void Effect()

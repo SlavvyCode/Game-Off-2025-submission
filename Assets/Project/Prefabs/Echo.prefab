@@ -194,15 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2bc64885aa13c449495dcf790b3d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Raycast_ObjectDetection
-  rayCount: 230
+  rayCount: 120
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 1
   shadowOnEnd: {fileID: 971400147750682445}
   sr: {fileID: 3988273767384028341}
-  objectFinalScale: {x: 10, y: 10, z: 10}
+  objectFinalScale: {x: 15, y: 15, z: 15}
   targetScale: {x: 1, y: 1, z: 1}
   endDuration: 2.6
+  coliderDetector: 1
   initialScale: {x: 0, y: 0, z: 0}
   thickness: 2
   distances: []
