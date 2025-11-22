@@ -50,7 +50,7 @@ public class Raycast_ObjectDetection : MonoBehaviour
         InitializeMask(rayCount);
         endDuration = endDuration / renderer.material.GetFloat("_WaveSpeed");
         renderer.material.SetTexture("_VisibilityMask", visibilityMask);
-        renderer.material.SetFloat("_StartTime",Time.time + 2f);
+        renderer.material.SetFloat("_StartTime",Time.time + 2f );
         transform.localScale = objectFinalScale;
         maxDistance = objectFinalScale.x / 2;
         //this.GetComponent<SpriteRenderer>().enabled = false;
