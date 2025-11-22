@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using General_and_Helpers;
 using Project.Scripts.Sound;
 using Project.Scripts.UI;
 using Project.Scripts.Util;
@@ -86,7 +87,15 @@ public class TopDownController : MonoBehaviour
         var _controls = PlayerInput.actions;
 
         _controls["Movement"].canceled += OnMoveControls;
-        _controls["ResetDebug"].started += DebugReset;
+        
+        //if in editor 
+// #if UNITY_EDITOR
+        _controls["ResetDebug"].performed += DebugReset;
+        _controls["Die"].performed += ctx => GameManager.Instance.KillPlayer();
+// #endif
+        
+        
+        
         _controls["Movement"].performed += OnMoveControls;
         _controls["Sneak"].started += ToggleSneak;
         _controls["Sneak"].canceled += ToggleSneak;

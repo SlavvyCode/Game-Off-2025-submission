@@ -86,6 +86,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Die",
+                    "type": "Button",
+                    "id": "e5061a76-96bd-4e25-a323-c237921fa2c4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -224,11 +233,22 @@
                 {
                     "name": "",
                     "id": "a7f6b1b9-d553-420a-9125-c354edc08c50",
-                    "path": "<Keyboard>/f8",
-                    "interactions": "",
+                    "path": "<Keyboard>/p",
+                    "interactions": "Hold(duration=2)",
                     "processors": "",
                     "groups": "",
                     "action": "ResetDebug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f2b1bc4-c4c9-44d1-a1a0-53d85272d9f0",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Hold(duration=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Die",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

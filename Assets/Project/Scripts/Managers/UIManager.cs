@@ -52,6 +52,7 @@ namespace Project.Scripts.UI
         {
             if (tutorialCanvas != null)
             {
+                PlayerPrefs.SetInt("TutorialSeen", 1);
                 tutorialCanvas.SetActive(false);
             }
         }
@@ -85,6 +86,18 @@ namespace Project.Scripts.UI
             // SceneManager.activeSceneChanged += OnSceneChanged;
             // OnSceneChanged(SceneManager.GetActiveScene(), SceneManager.GetActiveScene());
 
+            if (tutorialCanvas != null)
+            {
+                int seenTutorial = PlayerPrefs.GetInt("TutorialSeen", 0);
+                if (seenTutorial == 0)
+                {
+                    tutorialCanvas.SetActive(true);
+                }
+                else
+                {
+                    tutorialCanvas.SetActive(false);
+                }
+            }
 
         }
 

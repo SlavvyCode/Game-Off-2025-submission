@@ -172,6 +172,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Die"",
+                    ""type"": ""Button"",
+                    ""id"": ""e5061a76-96bd-4e25-a323-c237921fa2c4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -310,11 +319,22 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a7f6b1b9-d553-420a-9125-c354edc08c50"",
-                    ""path"": ""<Keyboard>/f8"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": ""Hold(duration=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ResetDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f2b1bc4-c4c9-44d1-a1a0-53d85272d9f0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Hold(duration=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Die"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -334,6 +354,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Sneak = m_Player.FindAction("Sneak", throwIfNotFound: true);
         m_Player_Scream = m_Player.FindAction("Scream", throwIfNotFound: true);
         m_Player_ResetDebug = m_Player.FindAction("ResetDebug", throwIfNotFound: true);
+        m_Player_Die = m_Player.FindAction("Die", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -423,6 +444,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sneak;
     private readonly InputAction m_Player_Scream;
     private readonly InputAction m_Player_ResetDebug;
+    private readonly InputAction m_Player_Die;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -470,6 +492,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ResetDebug".
         /// </summary>
         public InputAction @ResetDebug => m_Wrapper.m_Player_ResetDebug;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Die".
+        /// </summary>
+        public InputAction @Die => m_Wrapper.m_Player_Die;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -523,6 +549,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ResetDebug.started += instance.OnResetDebug;
             @ResetDebug.performed += instance.OnResetDebug;
             @ResetDebug.canceled += instance.OnResetDebug;
+            @Die.started += instance.OnDie;
+            @Die.performed += instance.OnDie;
+            @Die.canceled += instance.OnDie;
         }
 
         /// <summary>
@@ -561,6 +590,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ResetDebug.started -= instance.OnResetDebug;
             @ResetDebug.performed -= instance.OnResetDebug;
             @ResetDebug.canceled -= instance.OnResetDebug;
+            @Die.started -= instance.OnDie;
+            @Die.performed -= instance.OnDie;
+            @Die.canceled -= instance.OnDie;
         }
 
         /// <summary>
@@ -664,5 +696,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnResetDebug(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Die" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDie(InputAction.CallbackContext context);
     }
 }
