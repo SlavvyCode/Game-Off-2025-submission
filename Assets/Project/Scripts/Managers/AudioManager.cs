@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Project.Scripts.Sound;
 using UnityEngine;
 
@@ -6,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [SerializeField] private SoundEmitter emitterPrefab;
+    bool muted;
 
     // NOTE:
     // Use a direct AudioSource on the prefab when the sound is continuous
@@ -19,8 +22,21 @@ public class AudioManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        muted = true;
+        StartCoroutine(UnMuteAfterStart());
+    }
+
+    private IEnumerator UnMuteAfterStart()
+    {
+        yield return new WaitForSeconds(.5f);
+        muted = false;
+    }
+
     public void PlaySound(SoundData data, Vector2 position)
     {
+        if (muted) return;
         var emitter = Instantiate(emitterPrefab);
         emitter.Play(data, position);
     }
