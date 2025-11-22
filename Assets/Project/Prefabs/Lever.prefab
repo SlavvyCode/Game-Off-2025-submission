@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2986686158080665966}
-  - component: {fileID: 8945937093814431485}
   - component: {fileID: 2069481609917296239}
   - component: {fileID: 750220716465765682}
+  - component: {fileID: 8945937093814431485}
   - component: {fileID: 1316746543519540144}
   m_Layer: 3
   m_Name: Lever
@@ -35,24 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8945937093814431485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441022015514836548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc6d8a31ea861343a2eb0445c2c4626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableButton
-  requiresKey: 1
-  requiredKeyType: 0
-  leverOffSprite: {fileID: 21300000, guid: 8d46e46230a78e84786c68a1c482b275, type: 3}
-  leverOnSprite: {fileID: 21300000, guid: 496c0a443643d4840ba9d99f7b3b06bb, type: 3}
-  pairedObject: {fileID: 0}
-  leverSound: {fileID: 11400000, guid: 55fa7396b9d5f1f458e7cf6cbe1f7b78, type: 2}
 --- !u!61 &2069481609917296239
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -157,6 +139,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8945937093814431485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441022015514836548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc6d8a31ea861343a2eb0445c2c4626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableButton
+  requiresKey: 1
+  requiredKeyType: 0
+  leverOffSprite: {fileID: 21300000, guid: 8d46e46230a78e84786c68a1c482b275, type: 3}
+  leverOnSprite: {fileID: 21300000, guid: 496c0a443643d4840ba9d99f7b3b06bb, type: 3}
+  pairedObject: {fileID: 0}
+  leverSound: {fileID: 11400000, guid: 55fa7396b9d5f1f458e7cf6cbe1f7b78, type: 2}
 --- !u!114 &1316746543519540144
 MonoBehaviour:
   m_ObjectHideFlags: 0
