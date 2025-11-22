@@ -30,8 +30,6 @@ public class InteractableLever : MonoBehaviour, IInteractable
     {
         sr = GetComponent<SpriteRenderer>();
         saveID = GetComponent<SaveableObject>();
-        
-        
         UpdateLeverSprite();
     }
 
@@ -39,6 +37,7 @@ public class InteractableLever : MonoBehaviour, IInteractable
     {
         
         LoadState();
+        UpdateLeverSprite();  
     }
 
     private void UpdateLeverSpriteColor()
