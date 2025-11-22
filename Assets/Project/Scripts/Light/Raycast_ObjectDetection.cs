@@ -20,6 +20,9 @@ public class Raycast_ObjectDetection : MonoBehaviour
     public Vector3 targetScale = new Vector3(2f, 2f, 2f); // cílová velikost
     public float endDuration = 1.5f; // délka přechodu v sekundách
     public bool coliderDetector = false;
+    public float waveSpeed = 2;
+    public float waveStrength = 2;
+    public float animationMove = 2;
 
     public Vector3 initialScale;
     private float elapsedTime = 0f;
@@ -44,7 +47,9 @@ public class Raycast_ObjectDetection : MonoBehaviour
 
         Renderer renderer = GetComponent<Renderer>();
         renderer.material = Instantiate(renderer.material);
-        renderer.material.SetFloat("_StartTime", Time.time + 2f);
+        renderer.material.SetFloat("_StartTime", Time.time + animationMove);
+        renderer.material.SetFloat("_WaveSpeed", waveSpeed);
+        renderer.material.SetFloat("_WaveStrengh", waveStrength);
         endDuration = endDuration / renderer.material.GetFloat("_WaveSpeed");
         transform.localScale = objectFinalScale;
 
