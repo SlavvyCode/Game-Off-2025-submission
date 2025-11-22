@@ -32,6 +32,7 @@ public class TopDownController : MonoBehaviour
 
     Vector2 targetMovePosition;
     public GameObject SoundWave;
+    public GameObject StepSoundWave;
 
     public PlayerInput PlayerInput { get; private set; }    
     private InputAction _attackAction;
@@ -206,6 +207,8 @@ public class TopDownController : MonoBehaviour
                 var interval = GetCurrentStepInterval();
             AudioManager.Instance.PlaySound(footstepSound, gameObject.transform.position, sneaking ? .5f : 1);
             // AudioManager.Instance.PlaySoundGlobal(footstepSound);
+
+            Instantiate(StepSoundWave, transform.position, Quaternion.identity);
 
             nextStepTime = Time.time + interval;
     }

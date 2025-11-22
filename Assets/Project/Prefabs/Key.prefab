@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1001944521
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d9d7595424656f4dbbb2eef50601155, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.KeyItem
   keyType: 0
+  keyPickupSound: {fileID: 11400000, guid: ae502ffd07bb62941944c54a2b93b7f9, type: 2}
 --- !u!61 &5263189424298657667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -164,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36772b22ed84f70a77488178e2e566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.SaveableObject
-  uniqueID: 76bf1d31-b761-4e2a-b85e-af5c0538f862
+  uniqueID: e19e2ba0-dcef-4670-8357-8ec468c1191a

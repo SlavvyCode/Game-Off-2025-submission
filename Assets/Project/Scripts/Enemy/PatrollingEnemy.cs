@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using General_and_Helpers;
 using Project.Scripts.Sound;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,6 +19,7 @@ public class PatrollingEnemy : AbstractEnemy
     
     [SerializeField] float chasingStartDistance = .2f;
     [SerializeField] float chasingStopDistance = 0.2f;
+    
 
     
     
@@ -40,6 +42,15 @@ public class PatrollingEnemy : AbstractEnemy
     private float nextHissTime = 0f;
 
     
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //kill player
+            GameManager.Instance.KillPlayer();
+        }
+    }
+
     void Start()
     {
         Initialize();

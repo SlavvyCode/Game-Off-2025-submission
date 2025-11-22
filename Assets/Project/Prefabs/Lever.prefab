@@ -169,4 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36772b22ed84f70a77488178e2e566f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Objects.SaveableObject
-  uniqueID: 2f50a934-4cab-42b6-8cae-26cba73a954b
+  uniqueID: cf9b197d-8de4-467b-b362-a502da67d713
