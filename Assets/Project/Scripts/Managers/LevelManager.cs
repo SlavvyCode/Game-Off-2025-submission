@@ -76,7 +76,9 @@ namespace General_and_Helpers
             {
                 return;
             }
-            playerSpawnPosition = GameObject.Find("SpawnPoint").transform.position;
+            
+            
+            // playerSpawnPosition = GameObject.Find("SpawnPoint").transform.position;
 
             //should all get done on its own
             // MoveToCheckpoint();
