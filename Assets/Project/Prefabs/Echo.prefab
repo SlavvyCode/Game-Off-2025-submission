@@ -200,10 +200,13 @@ MonoBehaviour:
     m_Bits: 1
   shadowOnEnd: {fileID: 971400147750682445}
   sr: {fileID: 3988273767384028341}
-  objectFinalScale: {x: 20, y: 20, z: 20}
+  objectFinalScale: {x: 40, y: 40, z: 40}
   targetScale: {x: 1, y: 1, z: 1}
-  endDuration: 2.6
+  endDuration: 2
   coliderDetector: 1
+  waveSpeed: 1
+  waveStrength: 6
+  animationMove: 4
   initialScale: {x: 0, y: 0, z: 0}
   thickness: 2
   distances: []
