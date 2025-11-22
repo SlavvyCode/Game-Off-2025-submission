@@ -15,6 +15,7 @@ public class TopDownController : MonoBehaviour
     public float speed = 12.5f;
     // public float turnRate = 200.0f;
     public bool movementEnabled = true;
+    [SerializeField] private float screamAlertRadius = 8f;
     [SerializeField] private float screamCooldownTime = 5f;
     private Cooldown screamCooldown;
     
@@ -22,7 +23,7 @@ public class TopDownController : MonoBehaviour
     
     [SerializeField] private SoundData screamSound;
     [SerializeField] private SoundSet footstepSounds;
-    
+
     [SerializeField] private float stepInterval = 0.35f; // adjust for walk speed
     private float nextStepTime = 0f;
     [SerializeField] private float crouchStepMultiplier = 1.7f; // 1.70x slower
@@ -107,6 +108,9 @@ public class TopDownController : MonoBehaviour
         if (!screamCooldown.IsReady())
             return;
         
+        NotifyEnemiesOfScream(transform.position, screamAlertRadius);
+        
+        
         animator.SetBool("isScreaming", true);
         screamCooldown.Use();
         AudioManager.Instance.PlaySound(screamSound, transform.position);
@@ -115,6 +119,21 @@ public class TopDownController : MonoBehaviour
         StartCoroutine(DisableMovementForSeconds(screamSound.clip.length));
         StartCoroutine(SetDisableScreamAnimation(screamSound.clip.length));
 
+    }
+
+    private void NotifyEnemiesOfScream(Vector3 pos, float radius)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, radius);
+
+        foreach (var h in hits)
+        {
+            PatrollingEnemy enemy = h.GetComponent<PatrollingEnemy>();
+
+            if (enemy != null)
+            {
+                enemy.HearSound(pos);
+            }
+        }
     }
 
     private IEnumerator SetDisableScreamAnimation(float clipLength)
